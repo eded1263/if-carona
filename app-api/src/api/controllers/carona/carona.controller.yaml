@@ -1,0 +1,146 @@
+/carona:
+  post:
+    tags:
+      - Carona
+    description: Criar carona
+    responses:
+      200:
+        description: Carona criada
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: Carro
+        in: form
+        description: Id do carro que irá ser utilizado para a carona
+        type: string
+        required: true
+      - name: areaDeSaida
+        in: form
+        description: Areá Comum - Id da área comum que será a partida da carona
+        type: string
+        required: true
+      - name: horario
+        in: form
+        description: Horario em que a carona será fornecida
+        type: string
+        required: true
+      - name: totalDePessoas
+        in: form
+        description: Total de pessoas que podem aceitar a carona
+        type: integer
+  get:
+    tags:
+      - Carona
+    description: Rota para retornar as caronas cadastradas no sistema
+    responses:
+      200:
+        description: Retorna as caronas -- SOMENTE AS QUE PODEM SER ACEITAS
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      # Filtros?
+/carona/{idCarona}:
+  get:
+    tags:
+      - Carona
+    description: Rota para retornar os dados de uma carona
+    responses:
+      200:
+        description: Retorna a Carona solicitada
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idCarona
+        in: params
+        type: string
+        required: true
+        description: Id da Carona desejada
+  delete:
+    tags:
+      - Carona
+    description: Rota para excluir uma carona
+    responses:
+      200:
+        description: Retorna a carona excluída
+      400:
+        description: Carona ainda ativa e não pode ser excluída
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Carona não encontrada, ou não pertence a você
+    parameters:
+      - name: idCarona
+        in: params
+        type: string
+        required: true
+        description: Id da carona desejada
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+
+/carona/{idCarona}/cancelar:
+  post:
+    tags:
+      - Carona
+    description: Cancelar carona
+    responses:
+      200:
+        description: Retorna a carona cancelada
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Carona não encontrada, ou não pertence a você
+    parameters:
+      - name: idCarona
+        in: params
+        type: string
+        required: true
+        description: Id da carona desejada
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+
+/carona/{idCarona}/aceitar:
+  post:
+    tags:
+      - Carona
+    description: Aceitar carona
+    responses:
+      200:
+        description: Retorna a carona aceitada
+      400:
+        description: Você é o aluno dono dessa carona
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Carona não encontrada
+    parameters:
+      - name: idCarona
+        in: params
+        type: string
+        required: true
+        description: Id da carona desejada
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
