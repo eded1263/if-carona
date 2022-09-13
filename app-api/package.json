@@ -1,21 +1,23 @@
 {
-  "name": "api-if-carona",
-  "version": "1.0.0",
-  "description": "API para ser consumida pelas aplicações do IF Carona",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+	"name": "api-if-carona",
+	"version": "1.0.0",
+	"description": "API para ser consumida pelas aplicações do IF Carona",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"dev": "nodemon",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.0",
+		"express": "^4.17.3",
+		"swagger-jsdoc": "^6.2.5",
+		"swagger-ui-express": "^4.1.4"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.19"
+	}
 }

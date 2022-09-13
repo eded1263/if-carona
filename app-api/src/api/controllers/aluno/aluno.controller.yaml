@@ -1,0 +1,104 @@
+# /aluno/login:
+#   post:
+#     description: Login de aluno
+#     responses:
+#       200:
+#         description: Request OK
+#       400:
+#         description: Dados de login incorretos
+#     parameters:
+#       - name: RA
+#         in: form
+#         description: RA do aluno
+#         type: string
+#         required: true
+#       - name: password
+#         in: form
+#         description: Senha do aluno
+#         type: string
+#         required: true
+/aluno:
+  post:
+    description: Registro de aluno
+    responses:
+      200:
+        description: Aluno cadastrado
+      400:
+        description: Dados inválidos
+    parameters:
+      - name: nome
+        in: form
+        description: Nome do aluno
+        type: string
+        required: true
+      - name: password
+        in: form
+        description: Senha do aluno
+        type: string
+        required: true
+      - name: RA
+        in: form
+        description: Prontuário do aluno
+        type: string
+        required: true
+  get:
+    description: Rota para retornar os dados de perfil do aluno
+    responses:
+      200:
+        description: Retorna o perfil do aluno
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+  put:
+    description: Rota para atualizar os dados de perfil do aluno
+    responses:
+      200:
+        description: Retorna o perfil do aluno
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      # TODO: Verificar quais dados podem ser atualizados
+  delete:
+    description: Rota para excluir o perfil do aluno
+    responses:
+      200:
+        description: Retorna o perfil do aluno
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+/aluno/{idAluno}:
+  get:
+    description: Ver perfil do aluno
+    responses:
+      200:
+        description: Request ok - retorna dados do aluno solicitado
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Aluno não encontrado
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idAluno
+        in: params
+        type: string
+        required: true
+        description: Id do aluno requisitado
