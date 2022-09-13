@@ -1,0 +1,133 @@
+/carro:
+  post:
+    tags:
+      - Carro
+    description: Registro de carro
+    responses:
+      200:
+        description: Carro cadastrado
+      400:
+        description: Erro - Carro com mesma placa cadastrada
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: modelo
+        in: form
+        description: Modelo do carro
+        type: string
+        required: true
+      - name: placa
+        in: form
+        description: Placa do carro
+        type: string
+        required: true
+      - name: ano
+        in: form
+        description: Ano do carro
+        type: string
+        required: true
+      - name: cor
+        in: form
+        description: Cor do carro
+        type: string
+        required: true
+  get:
+    tags:
+      - Carro
+    description: Rota para retornar os carros do próprio aluno
+    responses:
+      200:
+        description: Retorna os meus carros
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+/carro/{idCarro}:
+  get:
+    tags:
+      - Carro
+    description: Rota para retornar um carro
+    responses:
+      200:
+        description: Retorna o carro solicitado
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idCarro
+        in: params
+        type: string
+        required: true
+        description: Id do carro desejado
+  put:
+    tags:
+      - Carro
+    description: Rota para atualizar os dados do carro
+    responses:
+      200:
+        description: Retorna o carro atualizado
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Carro não encontrado, ou não pertence a você
+    parameters:
+      - name: idCarro
+        in: params
+        type: string
+        required: true
+        description: Id do carro desejado
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: modelo
+        in: form
+        description: Modelo do carro
+        type: string
+        required: true
+      - name: ano
+        in: form
+        description: Ano do carro
+        type: string
+        required: true
+      - name: cor
+        in: form
+        description: Cor do carro
+        type: string
+        required: true
+  delete:
+    tags:
+      - Carro
+    description: Rota para excluir um carro
+    responses:
+      200:
+        description: Retorna o carro excluído
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Carro não encontrado, ou não pertence a você
+    parameters:
+      - name: idCarro
+        in: params
+        type: string
+        required: true
+        description: Id do carro desejado
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true

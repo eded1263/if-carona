@@ -19,6 +19,8 @@
 #         required: true
 /aluno:
   post:
+    tags:
+      - Aluno
     description: Registro de aluno
     responses:
       200:
@@ -42,6 +44,8 @@
         type: string
         required: true
   get:
+    tags:
+      - Aluno
     description: Rota para retornar os dados de perfil do aluno
     responses:
       200:
@@ -55,6 +59,8 @@
         type: string
         required: true
   put:
+    tags:
+      - Aluno
     description: Rota para atualizar os dados de perfil do aluno
     responses:
       200:
@@ -69,6 +75,8 @@
         required: true
       # TODO: Verificar quais dados podem ser atualizados
   delete:
+    tags:
+      - Aluno
     description: Rota para excluir o perfil do aluno
     responses:
       200:
@@ -83,6 +91,8 @@
         required: true
 /aluno/{idAluno}:
   get:
+    tags:
+      - Aluno
     description: Ver perfil do aluno
     responses:
       200:
