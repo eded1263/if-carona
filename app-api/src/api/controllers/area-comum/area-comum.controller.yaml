@@ -1,0 +1,198 @@
+/area-comum:
+  post:
+    tags:
+      - Área Comum
+    description: Registro de Área Comum -- Exclusivo Admin
+    responses:
+      200:
+        description: Área cadastrada
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: latitude
+        in: form
+        description: Latitude da localização
+        type: string
+        required: true
+      - name: longitude
+        in: form
+        description: Longitude da localização
+        type: string
+        required: true
+      - name: nome
+        in: form
+        description: Nome do local
+        type: string
+        required: true
+  get:
+    tags:
+      - Área Comum
+    description: Rota para retornar as áreas comuns do sistema
+    responses:
+      200:
+        description: Retorna as áreas comuns do sistema
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      # Filtros?
+/area-comum/{idArea}:
+  get:
+    tags:
+      - Área Comum
+    description: Rota para retornar uma área comum
+    responses:
+      200:
+        description: Retorna a área solicitada
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idArea
+        in: params
+        type: string
+        required: true
+        description: Id da área desejada
+  put:
+    tags:
+      - Área Comum
+    description: Rota para atualizar os dados da área comum
+    responses:
+      200:
+        description: Retorna a área atualizada
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Área não encontrada
+    parameters:
+      - name: idArea
+        in: params
+        type: string
+        required: true
+        description: Id da área desejada
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: latitude
+        in: form
+        description: Latitude da localização
+        type: string
+        required: true
+      - name: longitude
+        in: form
+        description: Longitude da localização
+        type: string
+        required: true
+      - name: nome
+        in: form
+        description: Nome do local
+        type: string
+        required: true
+  delete:
+    tags:
+      - Carro
+    description: Rota para excluir uma área comum
+    responses:
+      200:
+        description: Retorna a área excluída
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Área não encontrada
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idArea
+        in: params
+        type: string
+        required: true
+        description: Id da área desejada
+
+/area-comum/{idArea}/imagem:
+  post:
+    tags:
+      - Área Comum
+    description: Rota para retornar uma área comum
+    responses:
+      200:
+        description: Retorna a área solicitada
+      400:
+        description: Formato de imagem inválida
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idArea
+        in: params
+        type: string
+        required: true
+        description: Id da área desejada
+      - name: imagem
+        in: formData
+        type: file
+        required: true
+        description: Imagem do local
+      - name: nomeImagem
+        in: formData
+        type: string
+        required: true
+        description: Nome da imagem
+      - name: ordem
+        in: formData
+        type: integer
+        required: true
+        description: Posição da imagem no carrosel de imagens
+  put:
+    tags:
+      - Área Comum
+    description: Rota para retornar uma área comum
+    responses:
+      200:
+        description: Retorna a área solicitada
+      400:
+        description: Formato de imagem inválida
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idArea
+        in: params
+        type: string
+        required: true
+        description: Id da área desejada
+      - name: nomeImagem
+        in: form
+        type: string
+        required: true
+        description: Nome da imagem
+      - name: ordem
+        in: form
+        type: integer
+        required: true
+        description: Posição da imagem no carrosel de imagens
