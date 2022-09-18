@@ -6,6 +6,10 @@
     responses:
       200:
         description: Carona criada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carona"
       401:
         description: Erro no token de acesso
     parameters:
@@ -14,17 +18,17 @@
         description: Token de acesso
         type: string
         required: true
-      - name: Carro
+      - name: carro
         in: form
         description: Id do carro que irá ser utilizado para a carona
         type: string
         required: true
-      - name: areaDeSaida
+      - name: areaComum
         in: form
         description: Areá Comum - Id da área comum que será a partida da carona
         type: string
         required: true
-      - name: horario
+      - name: horarioDesejado
         in: form
         description: Horario em que a carona será fornecida
         type: string
@@ -40,6 +44,12 @@
     responses:
       200:
         description: Retorna as caronas -- SOMENTE AS QUE PODEM SER ACEITAS
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Carona"
       401:
         description: Erro no token de acesso
     parameters:
@@ -57,6 +67,10 @@
     responses:
       200:
         description: Retorna a Carona solicitada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carona"
       401:
         description: Erro no token de acesso
     parameters:
@@ -77,6 +91,10 @@
     responses:
       200:
         description: Retorna a carona excluída
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carona"
       400:
         description: Carona ainda ativa e não pode ser excluída
       401:
@@ -103,6 +121,10 @@
     responses:
       200:
         description: Retorna a carona cancelada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carona"
       401:
         description: Erro no token de acesso
       404:
@@ -127,6 +149,10 @@
     responses:
       200:
         description: Retorna a carona aceitada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carona"
       400:
         description: Você é o aluno dono dessa carona
       401:

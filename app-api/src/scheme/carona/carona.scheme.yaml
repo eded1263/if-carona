@@ -1,0 +1,80 @@
+components:
+  schemas:
+    Carona:
+      type: object
+      required:
+        - id
+        - totalDePessoas
+        - aluno
+        - areaComum
+        - horarioDesejado
+        - criadoEm
+        - atualizadoEm
+        - apagadoEm
+      properties:
+        id:
+          type: integer
+          example: 1
+        totalDePessoas:
+          type: integer
+          example: 3
+        alunos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Aluno Carona"
+        carro:
+          $ref: "#/components/schemas/Carro"
+        areaComum:
+          $ref: "#/components/schemas/Area Comum"
+        horarioDesejado:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        canceladoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        criadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        atualizadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        deletadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+    Aluno Carona:
+      type: object
+      required:
+        - aluno
+        - aceitadoEm
+        - canceladoEm
+        - criadoEm
+        - atualizadoEm
+        - apagadoEm
+      properties:
+        aluno:
+          $ref: "#/components/schemas/Aluno"
+        aceitadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        canceladoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        criadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        atualizadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        deletadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
