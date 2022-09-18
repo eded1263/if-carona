@@ -15,5 +15,9 @@ app.get("/", (req, res) => {
 	res.end();
 });
 
+app.get("/spec", (_req, res) => {
+	res.send(docsConfiguration);
+});
+
 //Exporta o aplicativo express configurado
 module.exports = app;
