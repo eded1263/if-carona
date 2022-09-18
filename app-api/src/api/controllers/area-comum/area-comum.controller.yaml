@@ -6,6 +6,10 @@
     responses:
       200:
         description: Área cadastrada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Area Comum"
       401:
         description: Erro no token de acesso
     parameters:
@@ -36,6 +40,12 @@
     responses:
       200:
         description: Retorna as áreas comuns do sistema
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Area Comum"
       401:
         description: Erro no token de acesso
     parameters:
@@ -53,6 +63,10 @@
     responses:
       200:
         description: Retorna a área solicitada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Area Comum"
       401:
         description: Erro no token de acesso
     parameters:
@@ -73,6 +87,10 @@
     responses:
       200:
         description: Retorna a área atualizada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Area Comum"
       401:
         description: Erro no token de acesso
       404:
@@ -105,11 +123,15 @@
         required: true
   delete:
     tags:
-      - Carro
+      - Área Comum
     description: Rota para excluir uma área comum
     responses:
       200:
         description: Retorna a área excluída
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Area Comum"
       401:
         description: Erro no token de acesso
       404:
@@ -130,10 +152,14 @@
   post:
     tags:
       - Área Comum
-    description: Rota para retornar uma área comum
+    description: Rota para adicionar imagens à uma área comum
     responses:
       200:
         description: Retorna a área solicitada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Foto Area Comum"
       400:
         description: Formato de imagem inválida
       401:
@@ -167,10 +193,14 @@
   put:
     tags:
       - Área Comum
-    description: Rota para retornar uma área comum
+    description: Rota para atualizar uma imagem de Área Comum
     responses:
       200:
         description: Retorna a área solicitada
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Foto Area Comum"
       400:
         description: Formato de imagem inválida
       401:

@@ -1,0 +1,80 @@
+components:
+  schemas:
+    Area Comum:
+      type: object
+      required:
+        - id
+        - latitude
+        - longitude
+        - nome
+        - fotos
+        - criadoPor
+        - criadoEm
+        - atualizadoEm
+        - apagadoEm
+      properties:
+        id:
+          type: integer
+          example: 1
+        latitude:
+          type: string
+          example: 0.0000
+        longitude:
+          type: string
+          example: 0.0000
+        nome:
+          type: string
+          example: Atacadão
+        fotos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Foto Area Comum"
+        criadoPor:
+          $ref: "#/components/schemas/Aluno"
+        criadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        atualizadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        deletadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+    Foto Area Comum:
+      type: object
+      required:
+        - id
+        - nomeImagem
+        - url
+        - criadoPor
+        - criadoEm
+        - atualizadoEm
+        - apagadoEm
+      properties:
+        id:
+          type: integer
+          example: 1
+        nomeImagem:
+          type: string
+          example: atacadao.jpg
+        url:
+          type: string
+          format: url
+          example: "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+        criadoPor:
+          $ref: "#/components/schemas/Aluno"
+        criadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        atualizadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        deletadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"

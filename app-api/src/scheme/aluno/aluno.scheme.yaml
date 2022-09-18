@@ -26,6 +26,7 @@ components:
           example: 12345678900
         fotoPerfil:
           type: string
+          format: url
           example: https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg
         criadoEm:
           type: string
