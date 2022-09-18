@@ -6,8 +6,6 @@ components:
         - id
         - RA
         - nome
-        - cpf
-        - fotoPerfil
         - criadoEm
         - atualizadoEm
         - apagadoEm
