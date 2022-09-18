@@ -25,6 +25,10 @@
     responses:
       200:
         description: Aluno cadastrado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
       400:
         description: Dados inválidos
     parameters:
@@ -50,6 +54,10 @@
     responses:
       200:
         description: Retorna o perfil do aluno
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
       401:
         description: Erro no token de acesso
     parameters:
@@ -65,6 +73,10 @@
     responses:
       200:
         description: Retorna o perfil do aluno
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
       401:
         description: Erro no token de acesso
     parameters:
@@ -73,7 +85,10 @@
         description: Token de acesso
         type: string
         required: true
-      # TODO: Verificar quais dados podem ser atualizados
+      - name: cpf
+        in: form
+        description: CPF do aluno
+        type: string
   delete:
     tags:
       - Aluno
@@ -81,6 +96,10 @@
     responses:
       200:
         description: Retorna o perfil do aluno
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
       401:
         description: Erro no token de acesso
     parameters:
@@ -89,6 +108,39 @@
         description: Token de acesso
         type: string
         required: true
+
+/aluno/foto:
+  post:
+    tags:
+      - Aluno
+    description: Rota para atualizar a foto de perfil do Aluno
+    responses:
+      200:
+        description: Retorna o aluno atualizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
+      400:
+        description: Formato de imagem inválida
+      401:
+        description: Erro no token de acesso
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: imagem
+        in: formData
+        type: file
+        required: true
+        description: Foto de perfil do aluno
+      - name: nomeImagem
+        in: formData
+        type: string
+        required: true
+        description: Nome da imagem
 /aluno/{idAluno}:
   get:
     tags:
@@ -97,6 +149,10 @@
     responses:
       200:
         description: Request ok - retorna dados do aluno solicitado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
       401:
         description: Erro no token de acesso
       404:

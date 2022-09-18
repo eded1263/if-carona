@@ -1,0 +1,41 @@
+components:
+  schemas:
+    Aluno:
+      type: object
+      required:
+        - id
+        - RA
+        - nome
+        - cpf
+        - fotoPerfil
+        - criadoEm
+        - atualizadoEm
+        - apagadoEm
+      properties:
+        id:
+          type: integer
+          example: 1
+        RA:
+          type: string
+          example: BP3012000
+        nome:
+          type: string
+          example: José da silva
+        cpf:
+          type: string
+          example: 12345678900
+        fotoPerfil:
+          type: string
+          example: https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg
+        criadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        atualizadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
+        deletadoEm:
+          type: string
+          format: date-time
+          example: "2016-08-29T09:12:33.001Z"
