@@ -155,11 +155,11 @@
     description: Rota para adicionar imagens à uma área comum
     responses:
       200:
-        description: Retorna a área solicitada
+        description: Retorna a imagem enviada
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Foto Area Comum"
+              $ref: "#/components/schemas/Foto"
       400:
         description: Formato de imagem inválida
       401:
@@ -200,7 +200,7 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Foto Area Comum"
+              $ref: "#/components/schemas/Foto"
       400:
         description: Formato de imagem inválida
       401:

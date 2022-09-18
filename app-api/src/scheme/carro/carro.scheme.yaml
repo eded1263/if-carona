@@ -1,13 +1,13 @@
 components:
   schemas:
-    Area Comum:
+    Carro:
       type: object
       required:
         - id
-        - latitude
-        - longitude
-        - nome
-        - fotos
+        - modelo
+        - placa
+        - cor
+        - ano
         - criadoPor
         - criadoEm
         - atualizadoEm
@@ -16,15 +16,19 @@ components:
         id:
           type: integer
           example: 1
-        latitude:
+        modelo:
           type: string
-          example: 0.0000
-        longitude:
+          example: Corsa
+        placa:
           type: string
-          example: 0.0000
-        nome:
+          example: AAA-1000
+        cor:
           type: string
-          example: Atacadão
+          example: Preto
+        ano:
+          type: string
+          pattern: '\d{4}'
+          example: 2001
         fotos:
           type: array
           items:

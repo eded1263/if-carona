@@ -1,13 +1,12 @@
 components:
   schemas:
-    Area Comum:
+    Foto:
       type: object
       required:
         - id
-        - latitude
-        - longitude
-        - nome
-        - fotos
+        - nomeImagem
+        - url
+        - ordem
         - criadoPor
         - criadoEm
         - atualizadoEm
@@ -16,19 +15,16 @@ components:
         id:
           type: integer
           example: 1
-        latitude:
+        nomeImagem:
           type: string
-          example: 0.0000
-        longitude:
+          example: foto.jpg
+        url:
           type: string
-          example: 0.0000
-        nome:
-          type: string
-          example: Atacadão
-        fotos:
-          type: array
-          items:
-            $ref: "#/components/schemas/Foto"
+          format: url
+          example: "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+        ordem:
+          type: integer
+          example: 0
         criadoPor:
           $ref: "#/components/schemas/Aluno"
         criadoEm:
