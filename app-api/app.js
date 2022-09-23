@@ -15,6 +15,11 @@ app.get("/", (req, res) => {
 	res.end();
 });
 
+app.use(
+	"/files",
+	express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
+);
+
 app.get("/spec", (_req, res) => {
 	res.send(docsConfiguration);
 });
