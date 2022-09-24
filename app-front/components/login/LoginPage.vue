@@ -80,7 +80,6 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: $font-primary;
   .header {
     flex: 1;
   }

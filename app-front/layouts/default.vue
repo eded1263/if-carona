@@ -8,7 +8,7 @@
       >
         <v-icon dark>mdi-arrow-left</v-icon>
       </CircleButton>
-      <Nuxt />
+      <Nuxt class="children" />
     </div>
   </div>
 </template>
@@ -34,7 +34,6 @@ export default {
 <style lang="scss" scoped>
 .carona-container {
   background-color: $primary;
-
   &.app {
     height: 100vh;
     width: 100vw;
@@ -46,9 +45,15 @@ export default {
     top: 25px;
     left: 25px;
   }
+  > .children {
+    padding: 0 25px;
+  }
 }
 </style>
 
 <style lang="scss">
 @import '@/assets/global.scss';
+* {
+  box-sizing: border-box;
+}
 </style>

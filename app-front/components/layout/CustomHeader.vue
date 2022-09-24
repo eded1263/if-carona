@@ -24,6 +24,7 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 25px;
+  color: $font-primary;
   > .titulos {
     text-align: center;
     > .titulo {
