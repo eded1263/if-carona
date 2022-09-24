@@ -1,11 +1,16 @@
 <template>
-  <div class="meus-carros">Meus Carros</div>
+  <div class="meus-carros">
+    <MeusCarrosPage />
+  </div>
 </template>
 
 <script>
+import MeusCarrosPage from '@/components/meus-carros/MeusCarrosPage.vue'
 export default {
-  created() {
-    this.$store.commit('layout/SET_BACK_BUTTON', true)
+  component: { MeusCarrosPage },
+  fetch({ store }) {
+    store.commit('layout/SET_BACK_BUTTON', true)
+    return store.dispatch('carros/GET_CARROS')
   },
 }
 </script>

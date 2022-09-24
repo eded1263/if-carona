@@ -36,11 +36,12 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
+    ['@nuxtjs/proxy', { pathRewrite: { '^/api': '' } }],
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseUrl: process.env.BASE_URL,
+  proxy: {
+    '/api': process.env.API_BASE_URL,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

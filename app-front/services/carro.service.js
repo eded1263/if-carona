@@ -1,8 +1,17 @@
-import axios from 'axios'
+import { BaseService } from './base.service'
 class CarroService {
-  static getMeusCarros() {
-    return axios.get('/carro').then((response) => response.data)
+  getMeusCarros() {
+    return BaseService.request({
+      url: '/api/carro',
+      method: 'GET',
+    }).then((response) => response.data)
+  }
+
+  getCarro(id) {
+    return BaseService.request({ url: `/api/carro/${id}`, method: 'GET' }).then(
+      (response) => response.data
+    )
   }
 }
 
-export default CarroService
+export const carroService = new CarroService()
