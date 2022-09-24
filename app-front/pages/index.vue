@@ -1,9 +1,14 @@
 <template>
-  <div>Index page</div>
+  <div>
+    <LoginPage />
+  </div>
 </template>
 
 <script>
-export default {}
+import LoginPage from '@/components/login/LoginPage.vue'
+export default {
+  components: { LoginPage },
+}
 </script>
 
 <style>

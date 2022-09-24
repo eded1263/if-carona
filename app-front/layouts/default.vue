@@ -1,22 +1,22 @@
 <template>
   <div>
     <div class="carona-container app">
-      <RoundButton
+      <CircleButton
         v-if="shouldShowBackButton"
         class="button"
         @click.native="goBack"
       >
         <v-icon dark>mdi-arrow-left</v-icon>
-      </RoundButton>
-      <Nuxt class="container" />
+      </CircleButton>
+      <Nuxt />
     </div>
   </div>
 </template>
 
 <script>
-import RoundButton from '@/components/layout/RoundButton.vue'
+import CircleButton from '@/components/layout/CircleButton.vue'
 export default {
-  components: { RoundButton },
+  components: { CircleButton },
   computed: {
     shouldShowBackButton() {
       return this.$store.state.layout.shouldShowBackButton
@@ -47,4 +47,8 @@ export default {
     left: 25px;
   }
 }
+</style>
+
+<style lang="scss">
+@import '@/assets/global.scss';
 </style>

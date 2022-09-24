@@ -1,5 +1,5 @@
 <template>
-  <div :class="['round-button', `-${size}`]">
+  <div :class="['back-button', `-${size}`]">
     <slot />
   </div>
 </template>
@@ -16,19 +16,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.round-button {
-  border-radius: 5px;
+.back-button {
+  border-radius: 50%;
   background-color: $button;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 600;
 
   &.-small {
     height: 50px;
+    width: 50px;
   }
 }
 </style>
