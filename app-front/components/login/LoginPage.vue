@@ -3,10 +3,7 @@
     <transition name="fade">
       <Loading v-if="isLoading" />
     </transition>
-    <div class="titulos">
-      <h1 class="titulo">Carona Estudantil</h1>
-      <span class="subtitulo">Login</span>
-    </div>
+    <CustomHeader page="Login" class="header" />
     <v-form ref="form" class="formulario">
       <CustomInput
         prefix="Nome:"
@@ -36,10 +33,11 @@
 
 <script>
 import CustomInput from '@/components/form/CustomInput.vue'
+import CustomHeader from '@/components/layout/CustomHeader.vue'
 import RoundButton from '@/components/layout/RoundButton.vue'
 import Loading from '@/components/layout/Loading.vue'
 export default {
-  components: { CustomInput, RoundButton, Loading },
+  components: { CustomInput, RoundButton, Loading, CustomHeader },
   data() {
     return {
       isLoading: false,
@@ -83,19 +81,8 @@ export default {
   align-items: center;
   flex-direction: column;
   color: $font-primary;
-  .titulos {
+  .header {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    padding-bottom: 25px;
-    > .titulo {
-      font-size: 52px;
-    }
-    > .subtitulo {
-      font-size: 24px;
-    }
   }
   .formulario {
     flex: 2;
