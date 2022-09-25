@@ -37,13 +37,19 @@
             prefix="Placa:"
             :value.sync="form.placa"
             :readonly="isUpdate"
-            :rules="[rules.required]"
+            :rules="!isUpdate ? [rules.required] : []"
           />
         </v-col>
       </v-row>
       <v-row>
         <v-col sm="12" md="6" class="custom">
-          <RoundButton type="reset" size="long"> Cancelar </RoundButton>
+          <RoundButton
+            :type="isUpdate ? 'button' : 'reset'"
+            size="long"
+            @click.native="excluirCarro"
+          >
+            {{ isUpdate ? 'Excluir' : 'Apagar' }}
+          </RoundButton>
         </v-col>
         <v-col sm="12" md="6" class="custom">
           <RoundButton type="submit" size="long"> Salvar </RoundButton>
@@ -68,6 +74,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       form: {
         modelo: '',
         ano: '',
@@ -86,8 +93,27 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.carros.loading
+      return this.$store.state.carros.loading || this.loading
     },
+    carro() {
+      return this.$store.state.carros.carro
+    },
+  },
+  created() {
+    if (this.isUpdate) {
+      this.loading = true
+    }
+  },
+  mounted() {
+    if (this.isUpdate) {
+      this.loading = false
+      this.form = {
+        modelo: this.carro.modelo,
+        placa: this.carro.placa,
+        cor: this.carro.cor,
+        ano: this.carro.ano,
+      }
+    }
   },
   methods: {
     submitForm() {
@@ -105,10 +131,31 @@ export default {
               // Adicionar notificação de erro
             })
         } else {
-          this.$store.dispatch('carros/PUT_CARRO', this.form).then(() => {
-            // Notificação
-          })
+          this.$store
+            .dispatch('carros/PUT_CARRO', {
+              id: this.carro.id,
+              carro: this.form,
+            })
+            .then(() => {
+              this.$router.push({
+                name: 'meus-carros',
+              })
+            })
         }
+      }
+    },
+    excluirCarro() {
+      if (this.isUpdate && confirm('Deseja realmente excluir o carro?')) {
+        this.$store
+          .dispatch('carros/DELETE_CARRO', { id: this.carro.id })
+          .then(() => {
+            this.$router.push({
+              name: 'meus-carros',
+            })
+          })
+          .catch((_error) => {
+            // Adicionar notificação de erro
+          })
       }
     },
   },

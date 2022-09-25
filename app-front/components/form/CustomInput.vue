@@ -3,7 +3,7 @@
     <v-text-field
       v-model="inputValue"
       :prefix="prefix"
-      background-color="#fff"
+      :background-color="!readonly ? '#fff' : ''"
       color="#AD9049"
       solo
       flat
@@ -11,7 +11,7 @@
       dense
       class="input"
       :rules="rules"
-      :readonly="readonly"
+      :disabled="readonly"
     />
   </div>
 </template>

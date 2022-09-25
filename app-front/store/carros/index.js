@@ -55,4 +55,20 @@ export const actions = {
       return carro
     })
   },
+  PUT_CARRO: ({ commit }, { id, carro }) => {
+    commit('SET_LOADING', true)
+    return carroService.putCarro(id, carro).then((c) => {
+      commit('SET_LOADING', false)
+      commit('SET_CARRO', c)
+      return c
+    })
+  },
+  DELETE_CARRO: ({ commit }, { id }) => {
+    commit('SET_LOADING', true)
+    return carroService.deleteCarro(id).then((carro) => {
+      commit('SET_LOADING', false)
+      commit('SET_CARRO', carro)
+      return carro
+    })
+  },
 }
