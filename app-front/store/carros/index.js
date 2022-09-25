@@ -25,9 +25,9 @@ export const mutations = {
 }
 
 export const actions = {
-  GET_CARROS: ({ commit, state }) => {
+  GET_CARROS: ({ commit }) => {
     commit('SET_LOADING', true)
-    carroService
+    return carroService
       .getMeusCarros()
       .then((response) => {
         commit('SET_CARROS', response)
@@ -39,12 +39,20 @@ export const actions = {
   },
   GET_CARRO: ({ commit }, id) => {
     commit('SET_LOADING', true)
-    carroService
+    return carroService
       .getCarroPorId(id)
       .then((carro) => {
         commit('SET_CARRO', carro)
         commit('SET_LOADING', false)
       })
       .catch((error) => commit('SET_ERROR', error))
+  },
+  POST_CARRO: ({ commit }, carro) => {
+    commit('SET_LOADING', true)
+    return carroService.postCarro(carro).then((carro) => {
+      commit('SET_LOADING', false)
+      commit('SET_CARRO', carro)
+      return carro
+    })
   },
 }

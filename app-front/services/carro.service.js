@@ -12,6 +12,14 @@ class CarroService {
       (response) => response.data
     )
   }
+
+  postCarro(carro) {
+    return BaseService.request({
+      url: '/api/carro',
+      method: 'POST',
+      data: carro,
+    }).then((response) => response.data)
+  }
 }
 
 export const carroService = new CarroService()

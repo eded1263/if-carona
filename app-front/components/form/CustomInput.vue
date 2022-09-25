@@ -11,6 +11,7 @@
       dense
       class="input"
       :rules="rules"
+      :readonly="readonly"
     />
   </div>
 </template>
@@ -25,6 +26,10 @@ export default {
     value: {
       type: String,
       required: true,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
     rules: {
       type: Array,

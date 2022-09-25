@@ -1,7 +1,7 @@
 <template>
-  <div :class="['round-button', `-${size}`]">
+  <button :class="['round-button', `-${size}`]" :type="type">
     <slot />
-  </div>
+  </button>
 </template>
 
 <script>
@@ -10,6 +10,10 @@ export default {
     size: {
       type: String,
       default: 'small',
+    },
+    type: {
+      type: String,
+      default: 'button',
     },
   },
 }
@@ -26,9 +30,10 @@ export default {
   color: #fff;
   font-size: 20px;
   font-weight: 600;
+  height: 50px;
 
-  &.-small {
-    height: 50px;
+  &.-long {
+    width: 100%;
   }
 }
 </style>

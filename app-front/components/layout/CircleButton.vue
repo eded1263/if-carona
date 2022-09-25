@@ -1,7 +1,7 @@
 <template>
-  <div :class="['back-button', `-${size}`]">
+  <button :class="['back-button', `-${size}`]" :type="type">
     <slot />
-  </div>
+  </button>
 </template>
 
 <script>
@@ -10,6 +10,10 @@ export default {
     size: {
       type: String,
       default: 'small',
+    },
+    type: {
+      type: String,
+      default: 'button',
     },
   },
 }
