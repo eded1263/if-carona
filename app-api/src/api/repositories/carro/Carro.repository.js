@@ -32,7 +32,7 @@ class CarroRepository {
 
 		if (index >= 0) {
 			const carro = this._mocks.meusCarros[index];
-			this._mocks.meusCarros.splice(index);
+			this._mocks.meusCarros.splice(index, 1);
 			return carro;
 		}
 		return null;

@@ -46,9 +46,11 @@ class CarroController {
 
 	postCarro = (req, res) => {
 		const { modelo, placa, ano, cor } = req.body;
-		let carro = { modelo, placa, ano, cor, fotos: [] };
 
-		carro = this.CarroRepository.salvarCarro(carro);
+		let carro = { modelo, placa, ano, cor, fotos: [] };
+		for (let i = 0; i <= 10; i++) {
+			carro = this.CarroRepository.salvarCarro(carro);
+		}
 		res.json(carro);
 	};
 
