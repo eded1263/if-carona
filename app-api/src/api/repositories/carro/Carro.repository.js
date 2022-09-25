@@ -7,11 +7,14 @@ class CarroRepository {
 		};
 	}
 
-	getCarrosDoUsuario(user) {
-		return { carros: meusCarros, total: meusCarros.length };
-	}
+	getCarrosDoUsuario = (user) => {
+		return {
+			carros: this._mocks.meusCarros,
+			total: this._mocks.meusCarros.length,
+		};
+	};
 
-	atualizarCarro(id, carro) {
+	atualizarCarro = (id, carro) => {
 		const index = this._mocks.meusCarros.findIndex((c) => c.id == id);
 
 		if (index > 0) {
@@ -22,7 +25,7 @@ class CarroRepository {
 			return this._mocks.meusCarros[index];
 		}
 		return null;
-	}
+	};
 
 	deleteCarroPorId(id) {
 		const index = this._mocks.meusCarros.findIndex((c) => c.id == id);
@@ -47,7 +50,7 @@ class CarroRepository {
 	salvarCarro(carro) {
 		const newCarro = {
 			...carro,
-			id: this._mocks.meusCarros.length,
+			id: this._mocks.meusCarros.length + 1,
 		};
 		this._mocks.meusCarros.push(newCarro);
 

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const CarroRepository = require("../../repositories/carro/Carro.repository");
-
+const multer = require("multer");
+const multerConfig = require("../../../config/multer");
 class CarroController {
 	router;
 	CarroRepository;
@@ -26,14 +27,14 @@ class CarroController {
 		this.router.delete("/carro/:id/imagem", this.deleteImagem);
 	}
 
-	getMeusCarros(req, res) {
+	getMeusCarros = (req, res) => {
 		// const user = req.user
 		const user = {};
-		const meusCarros = this.CarroRepository.getMeusCarros(user);
+		const meusCarros = this.CarroRepository.getCarrosDoUsuario(user);
 		res.json(meusCarros);
-	}
+	};
 
-	getCarroById(req, res) {
+	getCarroById = (req, res) => {
 		const carro = this.CarroRepository.getCarroPorId(req.params.id);
 		if (!carro) {
 			res.status(404).json({
@@ -41,18 +42,17 @@ class CarroController {
 			});
 		}
 		res.json(carro);
-	}
+	};
 
-	postCarro(req, res) {
+	postCarro = (req, res) => {
 		const { modelo, placa, ano, cor } = req.body;
-		let carro = { modelo, placa, ano, cor };
+		let carro = { modelo, placa, ano, cor, fotos: [] };
 
 		carro = this.CarroRepository.salvarCarro(carro);
-
 		res.json(carro);
-	}
+	};
 
-	putCarro(req, res) {
+	putCarro = (req, res) => {
 		const { modelo, ano, cor } = req.body;
 		let carro = { modelo, ano, cor };
 
@@ -65,9 +65,9 @@ class CarroController {
 		}
 
 		res.json(carro);
-	}
+	};
 
-	deleteCarro(req, res) {
+	deleteCarro = (req, res) => {
 		const carro = this.CarroRepository.deleteCarroPorId(req.params.id);
 
 		if (!carro) {
@@ -77,9 +77,9 @@ class CarroController {
 		}
 
 		res.json(carro);
-	}
+	};
 
-	postImagem(req, res) {
+	postImagem = (req, res) => {
 		const { key, location: url = "" } = req.file;
 		// Apenas uma foto por carro por limitações do mock
 		const foto = {
@@ -95,9 +95,9 @@ class CarroController {
 		}
 		carro.fotos = [foto];
 		res.json(this.CarroRepository.atualizarCarro(req.params.id, carro));
-	}
+	};
 
-	putImagem(req, res) {
+	putImagem = (req, res) => {
 		let carro = this.CarroRepository.getCarroPorId(req.params.id);
 		if (!carro) {
 			res.status(404).json({
@@ -106,8 +106,8 @@ class CarroController {
 		}
 		//atualizar imagem, método ainda não implementado porque só é permitido uma foto até agora
 		res.json(carro);
-	}
-	deleteImagem(req, res) {
+	};
+	deleteImagem = (req, res) => {
 		let carro = this.CarroRepository.getCarroPorId(req.params.id);
 		if (!carro) {
 			res.status(404).json({
@@ -127,7 +127,7 @@ class CarroController {
 		res.json(
 			res.json(this.CarroRepository.atualizarCarro(req.params.id, carro))
 		);
-	}
+	};
 }
 
 module.exports = new CarroController();
