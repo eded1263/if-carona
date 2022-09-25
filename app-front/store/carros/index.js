@@ -40,7 +40,7 @@ export const actions = {
   GET_CARRO: ({ commit }, id) => {
     commit('SET_LOADING', true)
     return carroService
-      .getCarroPorId(id)
+      .getCarro(id)
       .then((carro) => {
         commit('SET_CARRO', carro)
         commit('SET_LOADING', false)

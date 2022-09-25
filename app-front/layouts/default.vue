@@ -33,11 +33,9 @@ export default {
 
 <style lang="scss" scoped>
 .carona-container {
-  background-color: $primary;
   &.app {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    position: relative;
   }
 
   > .button {
@@ -46,7 +44,9 @@ export default {
     left: 25px;
   }
   > .children {
+    background-color: $primary;
     padding: 0 25px;
+    overflow: auto;
   }
 }
 </style>

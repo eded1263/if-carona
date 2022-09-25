@@ -35,5 +35,12 @@ export default {
   &.-long {
     width: 100%;
   }
+
+  &.-short-rounded {
+    height: 30px;
+    border-radius: 15px;
+    font-size: 16px;
+    padding: 0 15px;
+  }
 }
 </style>
