@@ -15,7 +15,6 @@ class CarroService {
 
 	getCarroById = async (req, res) => {
 		const carro = await this.CarroRepository.getCarroPorId(req.params.id);
-		console.log(carro);
 		if (!carro) {
 			res.status(404).json({
 				message: "Not found",

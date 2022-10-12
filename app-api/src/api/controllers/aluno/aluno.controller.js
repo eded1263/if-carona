@@ -14,6 +14,8 @@ class AlunoController {
 
 	initializeRoutes() {
 		this.router.get("/user", this.AlunoService.getProfile);
+		this.router.get("/admin/user", this.AlunoService.getAlunos);
+		this.router.post("/admin/user", this.AlunoService.postAluno);
 	}
 }
 

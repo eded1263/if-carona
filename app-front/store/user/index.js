@@ -25,6 +25,7 @@ export const mutations = {
   },
   SET_ERROR: (state, error) => {
     state.error = error
+    state.loading = false
   },
 }
 
@@ -61,10 +62,10 @@ export const actions = {
       })
       .catch((error) => commit('SET_ERROR', error))
   },
-  POST_USER: ({ commit }, { id, user }) => {
+  POST_USER: ({ commit }, user) => {
     commit('SET_LOADING', true)
     return userService
-      .postUser(id, user)
+      .postUser(user)
       .then((newUser) => {
         commit('SET_LOADING', false)
         return newUser

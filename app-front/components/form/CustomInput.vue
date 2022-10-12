@@ -12,6 +12,7 @@
       class="input"
       :rules="rules"
       :disabled="readonly"
+      :type="type"
     />
   </div>
 </template>
@@ -34,6 +35,10 @@ export default {
     rules: {
       type: Array,
       default: () => [],
+    },
+    type: {
+      type: String,
+      default: 'text',
     },
   },
   computed: {

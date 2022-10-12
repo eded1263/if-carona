@@ -1,6 +1,6 @@
 <template>
   <div class="home-page container">
-    <CustomHeader page="Home" class="header" />
+    <CustomHeader page="Alunos" class="header" />
     <Menu :menu="getMenuItems()" class="menu" />
   </div>
 </template>
@@ -19,12 +19,12 @@ export default {
     getMenuItems() {
       return [
         {
-          label: 'Meus Carros',
-          to: 'meus-carros',
+          label: 'Listar alunos',
+          to: 'usuarios-listagem',
         },
         {
-          label: 'Usuários',
-          to: 'usuarios',
+          label: 'Adicionar Alunos',
+          to: 'usuarios-novo',
           condition: this.user.isAdmin,
         },
       ]

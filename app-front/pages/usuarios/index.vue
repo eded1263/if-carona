@@ -1,16 +1,16 @@
 <template>
   <div class="meus-carros">
-    <MeusCarrosPage />
+    <UsuariosHomePage />
   </div>
 </template>
 
 <script>
-import MeusCarrosPage from '@/components/meus-carros/MeusCarrosPage.vue'
+import UsuariosHomePage from '@/components/usuarios/UsuariosHomePage.vue'
 export default {
-  component: { MeusCarrosPage },
+  component: { UsuariosHomePage },
+  middleware: 'isAdmin',
   fetch({ store }) {
     store.commit('layout/SET_BACK_BUTTON', true)
-    return store.dispatch('carros/GET_CARROS')
   },
 }
 </script>

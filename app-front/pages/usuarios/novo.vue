@@ -1,13 +1,13 @@
 <template>
   <div class="criar-carro">
-    <DetalhesCarroPage />
+    <DetalhesUsuarioPage />
   </div>
 </template>
 
 <script>
-import DetalhesCarroPage from '@/components/detalhes-carro/DetalhesCarroPage.vue'
+import DetalhesUsuarioPage from '@/components/usuarios/DetalhesUsuarioPage.vue'
 export default {
-  components: { DetalhesCarroPage },
+  components: { DetalhesUsuarioPage },
   fetch({ store }) {
     store.commit('layout/SET_BACK_BUTTON', true)
   },

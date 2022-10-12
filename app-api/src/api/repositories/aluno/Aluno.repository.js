@@ -1,9 +1,9 @@
 const db = require("../../../database/models");
 
 class AlunoRepository {
-	getAlunosDoUsuario = (user) => {
+	getAlunos = () => {
 		return db.User.findAndCountAll({
-			where: { criadoPor: user, deletedAt: null },
+			where: { deletedAt: null },
 		});
 	};
 
