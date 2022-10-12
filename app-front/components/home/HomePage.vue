@@ -1,7 +1,7 @@
 <template>
   <div class="home-page container">
     <CustomHeader page="Home" class="header" />
-    <Menu :menu="menuItems" class="menu" />
+    <Menu :menu="getMenuItems()" class="menu" />
   </div>
 </template>
 
@@ -10,15 +10,26 @@ import CustomHeader from '@/components/layout/CustomHeader.vue'
 import Menu from '@/components/layout/Menu.vue'
 export default {
   components: { CustomHeader, Menu },
-  data() {
-    return {
-      menuItems: [
+  computed: {
+    user() {
+      console.log(this.$store.state.user)
+      return this.$store.state.user.currentUser
+    },
+  },
+  methods: {
+    getMenuItems() {
+      return [
         {
           label: 'Meus Carros',
           to: 'meus-carros',
         },
-      ],
-    }
+        {
+          label: 'Usuários',
+          to: 'usuarios',
+          condition: this.user.isAdmin,
+        },
+      ]
+    },
   },
 }
 </script>

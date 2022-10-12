@@ -2,7 +2,7 @@
   <div class="menu-component">
     <v-row class="wrapper">
       <v-col
-        v-for="(item, index) in menu"
+        v-for="(item, index) in menuItems"
         :key="index"
         sm="12"
         :class="['coluna']"
@@ -22,6 +22,13 @@ export default {
     menu: {
       type: Array,
       required: true,
+    },
+  },
+  computed: {
+    menuItems() {
+      return this.menu.filter(
+        (item) => item.condition === undefined || item.condition
+      )
     },
   },
   methods: {
