@@ -33,9 +33,9 @@ export const actions = {
   GET_USERS: ({ commit }) => {
     commit('SET_LOADING', true)
     return userService
-      .getMeusCarros()
+      .getUsers()
       .then((response) => {
-        commit('SET_CARROS', response)
+        commit('SET_USERS', response)
         commit('SET_LOADING', false)
       })
       .catch((error) => {
@@ -92,10 +92,10 @@ export const actions = {
       })
       .catch((error) => commit('SET_ERROR', error))
   },
-  DELETE_USER: ({ commit }, id) => {
+  DELETE_USER: ({ commit }, { id }) => {
     commit('SET_LOADING', true)
     return userService
-      .deleteProfile(id)
+      .deleteUser(id)
       .then((user) => {
         commit('SET_LOADING', false)
         return user

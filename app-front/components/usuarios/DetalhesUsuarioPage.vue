@@ -13,12 +13,14 @@
           <CustomInput
             prefix="RA:"
             :value.sync="form.RA"
+            :readonly="cantUpdate"
             :rules="[rules.required]"
           />
         </v-col>
         <v-col sm="12" md="6" class="custom">
           <CustomInput
             prefix="Nome:"
+            :readonly="cantUpdate"
             :value.sync="form.nome"
             :rules="[rules.required]"
           />
@@ -28,6 +30,7 @@
         <v-col sm="12" md="6" class="custom">
           <CustomInput
             prefix="Email:"
+            :readonly="cantUpdate"
             :value.sync="form.email"
             :rules="[rules.required]"
           />
@@ -35,6 +38,7 @@
         <v-col sm="12" md="6" class="custom">
           <CustomInput
             prefix="CPF:"
+            :readonly="cantUpdate"
             :value.sync="form.cpf"
             :rules="[rules.required]"
           />
@@ -51,7 +55,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col sm="12" md="6" class="custom">
+        <v-col v-if="!isUpdate || isAdmin" sm="12" md="6" class="custom">
           <RoundButton
             :type="isUpdate ? 'button' : 'reset'"
             size="long"
@@ -60,7 +64,7 @@
             {{ isUpdate ? 'Excluir' : 'Apagar' }}
           </RoundButton>
         </v-col>
-        <v-col sm="12" md="6" class="custom">
+        <v-col sm="12" :md="!isUpdate || isAdmin ? '6' : '12'" class="custom">
           <RoundButton type="submit" size="long"> Salvar </RoundButton>
         </v-col>
       </v-row>
@@ -108,6 +112,12 @@ export default {
     user() {
       return this.$store.state.user.user
     },
+    isAdmin() {
+      return this.$store.state.user.currentUser.isAdmin
+    },
+    cantUpdate() {
+      return !(this.isUpdate && this.isAdmin)
+    },
   },
   created() {
     if (this.isUpdate) {
@@ -143,8 +153,8 @@ export default {
         } else {
           this.$store
             .dispatch('user/PUT_USER', {
-              id: this.carro.id,
-              carro: this.form,
+              id: this.user.id,
+              user: this.form,
             })
             .then(() => {
               this.$router.push({

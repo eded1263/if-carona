@@ -1,16 +1,16 @@
 <template>
   <div class="criar-carro">
-    <DetalhesCarroPage :is-update="true" />
+    <DetalhesUsuarioPage :is-update="true" />
   </div>
 </template>
 
 <script>
-import DetalhesCarroPage from '@/components/detalhes-carro/DetalhesCarroPage.vue'
+import DetalhesUsuarioPage from '@/components/usuarios/DetalhesUsuarioPage.vue'
 export default {
-  components: { DetalhesCarroPage },
+  components: { DetalhesUsuarioPage },
   fetch({ store, route }) {
     store.commit('layout/SET_BACK_BUTTON', true)
-    return store.dispatch('carros/GET_CARRO', route.params.id)
+    return store.dispatch('user/GET_USER', route.params.id)
   },
 }
 </script>

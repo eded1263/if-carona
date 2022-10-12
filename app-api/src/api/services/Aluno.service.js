@@ -18,6 +18,24 @@ class AlunoService {
 	postAluno = async (req, res) => {
 		res.json(await this.AlunoRepository.salvarAluno(req.body));
 	};
+
+	getAlunoPorId = async (req, res) => {
+		res.json(await this.AlunoRepository.getAlunoPorId(req.params.id));
+	};
+
+	putAluno = async (req, res) => {
+		const aluno = {
+			nome: req.body.nome,
+			RA: req.body.RA,
+			email: req.body.email,
+			cpf: req.body.cpf,
+		};
+		res.json(await this.AlunoRepository.atualizarAluno(req.params.id, aluno));
+	};
+
+	deleteAluno = async (req, res) => {
+		res.json(await this.AlunoRepository.deleteAlunoPorId(req.params.id));
+	};
 }
 
 module.exports = new AlunoService();
