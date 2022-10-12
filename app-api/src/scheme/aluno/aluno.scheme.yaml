@@ -22,6 +22,9 @@ components:
         cpf:
           type: string
           example: 12345678900
+        isAdmin:
+          type: boolean
+          example: false
         fotoPerfil:
           type: string
           format: url

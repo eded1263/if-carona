@@ -10,8 +10,8 @@ export const state = () => ({
 
 export const mutations = {
   SET_CARROS: (state, response) => {
-    state.carros = response.carros
-    state.total = response.total
+    state.carros = response.rows
+    state.total = response.count
   },
   SET_CARRO: (state, carro) => {
     state.carro = carro

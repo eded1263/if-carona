@@ -25,7 +25,7 @@ export default {
   methods: {
     goBack() {
       this.$store.commit('layout/SET_BACK_BUTTON', false)
-      this.$router.go(-1)
+      this.$router.push({ name: 'home' })
     },
   },
 }

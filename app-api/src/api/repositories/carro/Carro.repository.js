@@ -1,60 +1,33 @@
+const db = require("../../../database/models");
+
 class CarroRepository {
-	_mocks;
-
-	constructor() {
-		this._mocks = {
-			meusCarros: [],
-		};
-	}
-
 	getCarrosDoUsuario = (user) => {
-		return {
-			carros: this._mocks.meusCarros,
-			total: this._mocks.meusCarros.length,
-		};
+		return db.Carro.findAndCountAll({
+			where: { criadoPor: user, deletedAt: null },
+		});
 	};
 
 	atualizarCarro = (id, carro) => {
-		const index = this._mocks.meusCarros.findIndex((c) => c.id == id);
-
-		if (index > 0) {
-			this._mocks.meusCarros[index] = {
-				...this._mocks.meusCarros[index],
-				...carro,
-			};
-			return this._mocks.meusCarros[index];
-		}
-		return null;
+		return db.Carro.update(carro, { where: { id, deletedAt: null } });
 	};
 
 	deleteCarroPorId(id) {
-		const index = this._mocks.meusCarros.findIndex((c) => c.id == id);
-
-		if (index >= 0) {
-			const carro = this._mocks.meusCarros[index];
-			this._mocks.meusCarros.splice(index, 1);
-			return carro;
-		}
-		return null;
+		return db.Carro.update(
+			{ deletedAt: db.sequelize.fn("NOW") },
+			{ where: { id } }
+		);
 	}
 
 	getCarroPorId(id) {
-		const index = this._mocks.meusCarros.findIndex((c) => c.id == id);
-
-		if (index >= 0) {
-			return this._mocks.meusCarros[index];
-		}
-		return null;
+		return db.Carro.findByPk(id);
 	}
 
-	salvarCarro(carro) {
-		const newCarro = {
-			...carro,
-			id: this._mocks.meusCarros.length + 1,
-		};
-		this._mocks.meusCarros.push(newCarro);
+	async salvarCarro(carro) {
+		const carroInstance = db.Carro.build(carro);
 
-		return newCarro;
+		await carroInstance.save();
+
+		return carroInstance;
 	}
 }
 
