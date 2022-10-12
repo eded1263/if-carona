@@ -23,6 +23,13 @@ class AlunoService {
 		res.json(await this.AlunoRepository.getAlunoPorId(req.params.id));
 	};
 
+	putProfile = async (req, res) => {
+		const user = req.user;
+		console.log(req.body);
+		res.json(await this.AlunoRepository.atualizarAluno(1, req.body));
+		// res.json(this.AlunoRepository.getAlunoPorId(user.id))
+	};
+
 	putAluno = async (req, res) => {
 		const aluno = {
 			nome: req.body.nome,

@@ -82,12 +82,13 @@ export const actions = {
       })
       .catch((error) => commit('SET_ERROR', error))
   },
-  PUT_PROFILE: ({ commit }, { id, user }) => {
+  PUT_PROFILE: ({ commit, dispatch }, { user }) => {
     commit('SET_LOADING', true)
     return userService
-      .putProfile(id, user)
-      .then((newUser) => {
+      .putProfile(user)
+      .then(([newUser]) => {
         commit('SET_LOADING', false)
+        dispatch('GET_CURRENT_USER', newUser)
         return newUser
       })
       .catch((error) => commit('SET_ERROR', error))

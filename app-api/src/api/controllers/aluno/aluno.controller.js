@@ -17,6 +17,7 @@ class AlunoController {
 		this.router.get("/admin/user", this.AlunoService.getAlunos);
 		this.router.post("/admin/user", this.AlunoService.postAluno);
 		this.router.get("/user/:id", this.AlunoService.getAlunoPorId);
+		this.router.put("/user", this.AlunoService.putProfile);
 		this.router.put("/admin/user/:id", this.AlunoService.putAluno);
 		this.router.delete("/admin/user/:id", this.AlunoService.deleteAluno);
 	}

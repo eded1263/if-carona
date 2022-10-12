@@ -23,6 +23,10 @@ export default {
           to: 'meus-carros',
         },
         {
+          label: 'Perfil',
+          to: 'perfil',
+        },
+        {
           label: 'Usuários',
           to: 'usuarios',
           condition: this.user.isAdmin,
