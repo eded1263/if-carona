@@ -1,26 +1,35 @@
 <template>
-  <div class="detalhes-usuario">
+  <div class="detalhes-area-comum">
     <transition name="fade">
-      <Loading v-if="isLoading" />
+      <Loading v-if="state.isLoading" />
     </transition>
     <CustomHeader
-      :page="isUpdate ? 'Dados do aluno' : 'Cadastrar Aluno'"
+      :page="isUpdate ? 'Dados da Área Comum' : 'Cadastrar nova área'"
       class="header"
     />
     <v-form ref="form" class="formulario" @submit.prevent="submitForm">
       <v-row>
         <v-col sm="12" md="6" class="custom">
           <CustomInput
-            prefix="RA:"
-            :value.sync="form.RA"
-            :readonly="cantUpdate"
+            prefix="Longitude:"
+            :value.sync="form.longitude"
+            :readonly="isUpdate"
             :rules="[rules.required]"
           />
         </v-col>
         <v-col sm="12" md="6" class="custom">
           <CustomInput
-            prefix="Nome:"
-            :readonly="cantUpdate"
+            prefix="Latitude:"
+            :readonly="isUpdate"
+            :value.sync="form.latitude"
+            :rules="[rules.required]"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col sm="12" class="custom">
+          <CustomInput
+            prefix="Nome da área comum:"
             :value.sync="form.nome"
             :rules="[rules.required]"
           />
@@ -28,34 +37,6 @@
       </v-row>
       <v-row>
         <v-col sm="12" md="6" class="custom">
-          <CustomInput
-            prefix="Email:"
-            :readonly="cantUpdate"
-            :value.sync="form.email"
-            :rules="[rules.required]"
-          />
-        </v-col>
-        <v-col sm="12" md="6" class="custom">
-          <CustomInput
-            prefix="CPF:"
-            :readonly="cantUpdate"
-            :value.sync="form.cpf"
-            :rules="[rules.required]"
-          />
-        </v-col>
-      </v-row>
-      <v-row v-if="!isUpdate">
-        <v-col sm="12" class="custom">
-          <CustomInput
-            prefix="Senha:"
-            :value.sync="form.senha"
-            type="password"
-            :rules="[rules.required]"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col v-if="!isUpdate || isAdmin" sm="12" md="6" class="custom">
           <RoundButton
             :type="isUpdate ? 'button' : 'reset'"
             size="long"
@@ -64,7 +45,7 @@
             {{ isUpdate ? 'Excluir' : 'Apagar' }}
           </RoundButton>
         </v-col>
-        <v-col sm="12" :md="!isUpdate || isAdmin ? '6' : '12'" class="custom">
+        <v-col sm="12" md="6" class="custom">
           <RoundButton type="submit" size="long"> Salvar </RoundButton>
         </v-col>
       </v-row>
@@ -73,6 +54,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Loading from '@/components/layout/Loading.vue'
 import CustomHeader from '@/components/layout/CustomHeader.vue'
 import CustomInput from '@/components/form/CustomInput.vue'
@@ -89,11 +71,9 @@ export default {
     return {
       loading: false,
       form: {
-        RA: '',
-        cpf: '',
+        latitude: '',
+        longitude: '',
         nome: '',
-        email: '',
-        senha: '',
       },
       rules: {
         required: (v) => {
@@ -106,18 +86,9 @@ export default {
     }
   },
   computed: {
-    isLoading() {
-      return this.$store.state.user.loading || this.loading
-    },
-    user() {
-      return this.$store.state.user.user
-    },
-    isAdmin() {
-      return this.$store.state.user.currentUser.isAdmin
-    },
-    cantUpdate() {
-      return !(this.isUpdate && this.isAdmin)
-    },
+    ...mapState({
+      state: 'area-comum',
+    }),
   },
   created() {
     if (this.isUpdate) {
@@ -128,10 +99,9 @@ export default {
     if (this.isUpdate) {
       this.loading = false
       this.form = {
-        RA: this.user.RA,
-        cpf: this.user.cpf,
-        nome: this.user.nome,
-        email: this.user.email,
+        latitude: this.state.areaComum.latitude,
+        longitude: this.state.areaComum.longitude,
+        nome: this.state.areaComum.nome,
       }
     }
   },
@@ -141,24 +111,21 @@ export default {
       if (isValid) {
         if (!this.isUpdate) {
           this.$store
-            .dispatch('user/POST_USER', this.form)
+            .dispatch('area-comum/POST_AREA_COMUM', this.form)
             .then(() => {
               this.$router.push({
-                name: 'usuarios',
+                name: 'area-comum',
               })
-            })
-            .catch((_error) => {
-              // Adicionar notificação de erro
             })
         } else {
           this.$store
-            .dispatch('user/PUT_USER', {
-              id: this.user.id,
-              user: this.form,
+            .dispatch('area-comum/PUT_AREA_COMUM', {
+              id: this.state.areaComum.id,
+              areaComum: this.form,
             })
             .then(() => {
               this.$router.push({
-                name: 'usuarios',
+                name: 'area-comum',
               })
             })
         }
@@ -167,22 +134,17 @@ export default {
     excluirUser() {
       if (this.isUpdate && confirm('Deseja realmente excluir o Usuário?')) {
         this.$store
-          .dispatch('user/DELETE_USER', { id: this.user.id })
+          .dispatch('area-comum/DELETE_AREA_COMUM', this.state.areaComum.id)
           .then(() => {
             this.$router.push({
-              name: 'usuarios',
+              name: 'area-comum',
             })
-          })
-          .catch((_error) => {
-            // Adicionar notificação de erro
           })
       } else if (!this.isUpdate) {
         this.form = {
-          RA: '',
-          cpf: '',
+          latitude: '',
+          longitude: '',
           nome: '',
-          email: '',
-          senha: '',
         }
       }
     },
@@ -191,7 +153,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.detalhes-usuario {
+.detalhes-area-comum {
   padding: 0;
   min-height: 100vh;
   display: flex;

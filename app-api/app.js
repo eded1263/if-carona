@@ -7,6 +7,7 @@ const app = express();
 const morgan = require("morgan");
 const carroController = require("./src/api/controllers/carro/carro.controller");
 const alunoController = require("./src/api/controllers/aluno/aluno.controller");
+const areaComumController = require("./src/api/controllers/area-comum/AreaComum.controller");
 const bodyParser = require("body-parser");
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(docsConfiguration));
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Configuração das rotas da API
 app.use(carroController.router);
 app.use(alunoController.router);
+app.use(areaComumController.router);
 
 // middleware
 app.use("/files", express.static(path.resolve(__dirname, "tmp", "uploads")));

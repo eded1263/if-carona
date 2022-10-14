@@ -156,6 +156,13 @@ export default {
           .catch((_error) => {
             // Adicionar notificação de erro
           })
+      } else if (!this.isUpdate) {
+        this.form = {
+          modelo: '',
+          ano: '',
+          placa: '',
+          cor: '',
+        }
       }
     },
   },

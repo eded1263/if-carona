@@ -59,9 +59,9 @@ class CarroService {
 		res.json(carro);
 	};
 
+	// Daqui para baixo status: TODO
 	postImagem = (req, res) => {
 		const { key, location: url = "" } = req.file;
-		// Apenas uma foto por carro por limitações do mock
 		const foto = {
 			url,
 			nomeImagem: key,
@@ -84,7 +84,6 @@ class CarroService {
 				message: "Not found",
 			});
 		}
-		//atualizar imagem, método ainda não implementado porque só é permitido uma foto até agora
 		res.json(carro);
 	};
 	deleteImagem = (req, res) => {

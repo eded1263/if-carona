@@ -31,6 +31,11 @@ export default {
           to: 'usuarios',
           condition: this.user.isAdmin,
         },
+        {
+          label: 'Área Comum',
+          to: 'area-comum',
+          condition: this.user.isAdmin,
+        },
       ]
     },
   },

@@ -1,17 +1,17 @@
 <template>
-  <div class="card-user">
+  <div class="card-area-comum">
     <div class="descricao">
-      <span class="user"> {{ user.nome }}, RA: {{ user.RA }} </span>
+      <span class="area"> {{ areaComum.nome }}</span>
     </div>
     <div class="info">
-      <span class="cpf"> CPF: {{ user.cpf }} </span>
-      <span class="email"> Email: {{ user.email }} </span>
+      <span class="lat"> Latitude: {{ areaComum.latitude }} </span>
+      <span class="long"> Longitude: {{ areaComum.longitude }} </span>
     </div>
     <div class="action">
       <RoundButton
         class="button"
         size="short-rounded"
-        @click.native="detalhesUsuario"
+        @click.native="detalhesAreaComum"
       >
         Detalhes
       </RoundButton>
@@ -24,17 +24,17 @@ import RoundButton from '../layout/RoundButton.vue'
 export default {
   components: { RoundButton },
   props: {
-    user: {
+    areaComum: {
       type: Object,
       required: true,
     },
   },
   methods: {
-    detalhesUsuario() {
+    detalhesAreaComum() {
       this.$router.push({
-        name: 'usuarios-id',
+        name: 'area-comum-id',
         params: {
-          id: this.user.id,
+          id: this.areaComum.id,
         },
       })
     },
@@ -43,13 +43,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-user {
+.card-area-comum {
   background-color: #fff;
   color: $font-primary;
   display: grid;
   grid-template-rows: 30px 30px 30px;
   border-radius: 15px;
   padding: 20px;
+
   > .descricao {
     font-weight: 600;
   }

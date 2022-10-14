@@ -1,19 +1,21 @@
 <template>
-  <div class="listagem-usuarios">
-    <CustomHeader page="Listagem de usuários" class="header" />
-    <div :class="['usuarios', { '-not-empty': total > 0 }]">
-      <p v-if="total <= 0" class="empty">Não há usuários além de você.</p>
+  <div class="listagem-area-comum">
+    <CustomHeader page="Listagem de Áreas comuns" class="header" />
+    <div :class="['area', { '-not-empty': state.total > 0 }]">
+      <p v-if="state.total <= 0" class="empty">
+        Não há Áreas comuns cadastradas.
+      </p>
       <div v-else class="lista">
-        <CardUser
-          v-for="user in users"
-          :key="user.id"
-          :user="user"
-          class="user"
+        <CardAreaComum
+          v-for="areaComum in state.areasComuns"
+          :key="areaComum.id"
+          :area-comum="areaComum"
+          class="areaComum"
         />
       </div>
     </div>
     <div class="botao">
-      <CircleButton @click.native="redirect({ name: 'usuarios-novo' })">
+      <CircleButton @click.native="redirect({ name: 'area-comum-novo' })">
         <v-icon dark> mdi-plus </v-icon>
       </CircleButton>
     </div>
@@ -21,19 +23,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import CustomHeader from '@/components/layout/CustomHeader.vue'
 import CircleButton from '@/components/layout/CircleButton.vue'
-import CardUser from '@/components/usuarios/CardUser.vue'
+import CardAreaComum from '@/components/area-comum/CardAreaComum.vue'
 export default {
-  name: 'ListagemUsuariosPage',
-  components: { CustomHeader, CircleButton, CardUser },
+  components: { CustomHeader, CircleButton, CardAreaComum },
   computed: {
-    total() {
-      return this.$store.state.user.total
-    },
-    users() {
-      return this.$store.state.user.users
-    },
+    ...mapState({
+      state: 'area-comum',
+    }),
   },
   methods: {
     redirect(route) {
@@ -44,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.listagem-usuarios {
+.listagem-area-comum {
   padding: 0;
   min-height: 100vh;
   display: flex;
@@ -55,8 +54,9 @@ export default {
   > .header {
     flex: 1;
   }
-  > .usuarios {
+  > .area {
     flex: 2;
+
     & .not-empty {
       width: 90%;
     }
@@ -66,7 +66,7 @@ export default {
     }
     > .lista {
       display: flex;
-      max-width: 100%;
+      width: 100%;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
