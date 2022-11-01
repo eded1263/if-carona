@@ -1,16 +1,16 @@
 {
 	"development": {
 		"username": "root",
-		"password": "my-secret-pw",
-		"database": "database_development",
-		"host": "127.0.0.1",
+		"password": "root",
+		"database": "if_carona_development",
+		"host": "db",
 		"dialect": "mysql"
 	},
 	"test": {
 		"username": "root",
-		"password": null,
-		"database": "database_test",
-		"host": "127.0.0.1",
+		"password": "root",
+		"database": "if_carona_test",
+		"host": "db",
 		"dialect": "mysql"
 	},
 	"production": {
