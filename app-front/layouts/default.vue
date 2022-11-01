@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="carona-container app">
+      <notifications />
       <CircleButton
         v-if="shouldShowBackButton"
         class="button"
