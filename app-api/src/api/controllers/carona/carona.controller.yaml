@@ -95,8 +95,6 @@
           application/json:
             schema:
               $ref: "#/components/schemas/Carona"
-      400:
-        description: Carona ainda ativa e não pode ser excluída
       401:
         description: Erro no token de acesso
       404:
