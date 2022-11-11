@@ -19,6 +19,7 @@ class CarroService {
 			res.status(404).json({
 				message: "Not found",
 			});
+			return;
 		}
 		res.json(carro);
 	};

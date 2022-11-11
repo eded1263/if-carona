@@ -10,8 +10,9 @@
 		"username": "root",
 		"password": "root",
 		"database": "if_carona_test",
-		"host": "db",
-		"dialect": "mysql"
+		"host": "127.0.0.1",
+		"dialect": "mysql",
+		"logging": false
 	},
 	"production": {
 		"username": "root",

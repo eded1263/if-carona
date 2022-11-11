@@ -4,7 +4,6 @@ const supertest = require("supertest");
 
 describe("Teste das rotas de aluno", () => {
 	let thisDb = db;
-
 	beforeAll(async () => {
 		await thisDb.sequelize.sync({ force: true });
 	});
@@ -47,9 +46,7 @@ describe("Teste das rotas de aluno", () => {
 			cpf: "12345678",
 			nome: "Teste",
 		};
-		const response = await (
-			await supertest(app).put("/admin/user/1")
-		).send(putAluno);
+		const response = await supertest(app).put("/admin/user/1").send(putAluno);
 
 		expect(response.status).toBe(200);
 	});
@@ -64,7 +61,7 @@ describe("Teste das rotas de aluno", () => {
 	});
 
 	it("[DELETE] Apagar um perfil ", async () => {
-		const response = await supertest(app).delete("/user/1");
+		const response = await supertest(app).delete("/admin/user/1");
 
 		expect(response.status).toBe(200);
 	});

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mysql_db:
+    container_name: mysql_db
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=if_carona_test
+      - MYSQL_ROOT_PASSWORD=root

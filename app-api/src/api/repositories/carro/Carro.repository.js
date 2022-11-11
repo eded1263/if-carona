@@ -25,7 +25,11 @@ class CarroRepository {
 	async salvarCarro(carro) {
 		const carroInstance = db.Carro.build(carro);
 
-		await carroInstance.save();
+		try {
+			await carroInstance.save();
+		} catch (e) {
+			console.log(e);
+		}
 
 		return carroInstance;
 	}
