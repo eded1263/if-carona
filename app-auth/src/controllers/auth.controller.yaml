@@ -1,0 +1,57 @@
+/login:
+  post:
+    description: Login
+    tags:
+      - Auth
+    responses:
+      200:
+        description: Request OK
+      400:
+        description: Dados de login incorretos
+    parameters:
+      - name: RA
+        in: form
+        description: RA do aluno
+        type: string
+        required: true
+      - name: password
+        in: form
+        description: Senha do aluno
+        type: string
+        required: true
+/cadastrar-usuario:
+  post:
+    tags:
+      - Auth
+    description: Registro de aluno
+    responses:
+      200:
+        description: Aluno cadastrado
+      400:
+        description: Dados inválidos
+    parameters:
+      - name: nome
+        in: form
+        description: Nome do aluno
+        type: string
+        required: true
+      - name: senha
+        in: form
+        description: Senha do aluno
+        type: string
+        required: true
+      - name: RA
+        in: form
+        description: Prontuário do aluno
+        type: string
+        required: true
+      - name: email
+        in: form
+        description: Email do aluno
+        type: string
+        required: true
+      - name: cpf
+        in: form
+        description: CPF do aluno
+        type: string
+        required: true

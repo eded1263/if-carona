@@ -37,7 +37,7 @@
         description: Nome do aluno
         type: string
         required: true
-      - name: password
+      - name: senha
         in: form
         description: Senha do aluno
         type: string

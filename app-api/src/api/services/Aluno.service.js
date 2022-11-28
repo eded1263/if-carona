@@ -15,10 +15,6 @@ class AlunoService {
 		res.json(await this.AlunoRepository.getAlunos());
 	};
 
-	postAluno = async (req, res) => {
-		res.json(await this.AlunoRepository.salvarAluno(req.body));
-	};
-
 	getAlunoPorId = async (req, res) => {
 		res.json(await this.AlunoRepository.getAlunoPorId(req.params.id));
 	};
