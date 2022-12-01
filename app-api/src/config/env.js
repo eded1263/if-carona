@@ -1,5 +1,5 @@
-const resolve = require("path");
+const path = require("path");
 
-const config = require("dotenv");
+const { config } = require("dotenv");
 
-config({ path: resolve(__dirname, "../../.env") });
+config({ path: path.resolve(__dirname, "../../.env") });

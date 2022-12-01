@@ -1,4 +1,5 @@
 import { BaseService } from './base.service'
+
 class UserService {
   getUsers() {
     return BaseService.request({
@@ -37,9 +38,17 @@ class UserService {
     }).then((response) => response.data)
   }
 
+  login(credentials) {
+    return BaseService.authRequest({
+      url: `/login`,
+      method: 'POST',
+      data: credentials,
+    }).then((response) => response.data)
+  }
+
   postUser(user) {
-    return BaseService.request({
-      url: `/api/admin/user/`,
+    return BaseService.authRequest({
+      url: `/cadastro-usuario`,
       method: 'POST',
       data: user,
     }).then((response) => response.data)

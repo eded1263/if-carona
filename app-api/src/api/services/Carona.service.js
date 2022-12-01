@@ -19,7 +19,7 @@ class CaronaService {
 
 	atualizarCarona = async (req, res) => {
 		const carona = await this.CaronaRepository.getCaronaPorId(req.params.id, {
-			criadoPor: 1,
+			criadoPor: req.user.id,
 		});
 		if (!carona) {
 			res.status(404).json({ message: "Not found" });
@@ -34,7 +34,7 @@ class CaronaService {
 
 	deleteCarona = async (req, res) => {
 		const carona = await this.CaronaRepository.getCaronaPorId(req.params.id, {
-			criadoPor: 1,
+			criadoPor: req.user.id,
 		});
 		if (!carona) {
 			res.status(404).json({ message: "Not found" });
@@ -46,7 +46,7 @@ class CaronaService {
 	postCarona = async (req, res) => {
 		// TODO: verificar se o carro pertence ao usuario que fez a request, caso seja enviado na request
 		// TODO: Caso seja enviado carro, adicionar dataOferecida
-		let carona = { ...req.body, criadoPor: 1 };
+		let carona = { ...req.body, criadoPor: req.user.id };
 
 		carona = await this.CaronaRepository.criarCarona(carona);
 
@@ -66,14 +66,14 @@ class CaronaService {
 			caronaUpdt = {
 				carro: req.body.carro,
 				dataAceitada: Date.now(),
-				aceitadoPor: 1,
+				aceitadoPor: req.user.id,
 			};
 		}
 		if (req.body.alunoCarona) {
 			caronaUpdt = {
 				alunoCarona: req.body.alunoCarona,
 				dataAceitada: Date.now(),
-				aceitadoPor: 1,
+				aceitadoPor: req.user.id,
 			};
 		}
 		await this.CaronaRepository.atualizarCarona(carona.id, caronaUpdt);
@@ -85,7 +85,7 @@ class CaronaService {
 		const carona = await this.CaronaRepository.getCaronaPorId(req.params.id);
 		await this.CaronaRepository.atualizarCarona(carona.id, {
 			dataCancelada: Date.now(),
-			canceladoPor: 1,
+			canceladoPor: req.user.id,
 		});
 	};
 }

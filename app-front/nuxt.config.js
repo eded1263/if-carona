@@ -1,5 +1,4 @@
 import colors from 'vuetify/es5/util/colors'
-
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -40,11 +39,15 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    ['@nuxtjs/proxy', { pathRewrite: { '^/api': '' } }],
+    '@nuxtjs/proxy',
   ],
 
+  axios: {
+    proxy: true,
+  },
+
   proxy: {
-    '/api': process.env.API_BASE_URL,
+    '/api': { target: process.env.API_BASE_URL, pathRewrite: { '^/api': '' } },
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -71,6 +74,10 @@ export default {
         },
       },
     },
+  },
+
+  server: {
+    port: 8000, // default: 3000
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

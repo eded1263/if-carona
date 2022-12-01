@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { userService } from '@/services/user.service'
 
 export const state = () => ({
@@ -52,15 +53,17 @@ export const actions = {
       })
       .catch((error) => commit('SET_ERROR', error))
   },
-  GET_CURRENT_USER: ({ commit }, id) => {
+  GET_CURRENT_USER: ({ commit }) => {
     commit('SET_LOADING', true)
     return userService
-      .getProfile(id)
+      .getProfile()
       .then((user) => {
         commit('SET_CURRENT_USER', user)
         commit('SET_LOADING', false)
       })
-      .catch((error) => commit('SET_ERROR', error))
+      .catch((error) => {
+        commit('SET_ERROR', error)
+      })
   },
   POST_USER: ({ commit }, user) => {
     commit('SET_LOADING', true)
@@ -71,6 +74,17 @@ export const actions = {
         return newUser
       })
       .catch((error) => commit('SET_ERROR', error))
+  },
+  POST_LOGIN: ({ commit, dispatch }, credentials) => {
+    commit('SET_LOADING', true)
+    return userService.login(credentials).then(({ token }) => {
+      commit('SET_LOADING', false)
+      Cookies.set('Authorization', `Bearer ${token}`, {
+        expires: 7,
+        httpOnly: false,
+      })
+      return dispatch('GET_CURRENT_USER')
+    })
   },
   PUT_USER: ({ commit }, { id, user }) => {
     commit('SET_LOADING', true)

@@ -24,7 +24,7 @@ class CarroService {
 	};
 
 	postAreaComum = async (req, res) => {
-		let areaComum = { ...req.body, fotos: [], criadoPor: 1 };
+		let areaComum = { ...req.body, fotos: [], criadoPor: req.user.id };
 		areaComum = await this.AreaComumRepository.salvarAreaComum(areaComum);
 
 		res.json(areaComum);

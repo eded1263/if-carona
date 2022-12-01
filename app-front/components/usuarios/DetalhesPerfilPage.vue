@@ -88,7 +88,7 @@ export default {
       return this.$store.state.user.currentUser
     },
     isAdmin() {
-      return this.$store.state.user.currentUser.isAdmin
+      return this.$store.state.user.currentUser?.isAdmin
     },
     cantUpdate() {
       return !this.isAdmin

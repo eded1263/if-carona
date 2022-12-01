@@ -27,7 +27,7 @@ class CarroService {
 	postCarro = async (req, res) => {
 		const { modelo, placa, ano, cor } = req.body;
 
-		let carro = { modelo, placa, ano, cor, fotos: [], criadoPor: 1 };
+		let carro = { modelo, placa, ano, cor, fotos: [], criadoPor: req.user.id };
 		carro = await this.CarroRepository.salvarCarro(carro);
 
 		res.json(carro);

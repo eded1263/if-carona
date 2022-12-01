@@ -12,7 +12,8 @@ export default {
   components: { CustomHeader, Menu },
   computed: {
     user() {
-      return this.$store.state.user.currentUser
+      // return this.$store.state.user.currentUser
+      return { isAdmin: false }
     },
   },
   methods: {
@@ -35,6 +36,10 @@ export default {
           label: 'Área Comum',
           to: 'area-comum',
           condition: this.user.isAdmin,
+        },
+        {
+          label: 'Sair',
+          to: 'logout',
         },
       ]
     },

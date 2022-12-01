@@ -7,8 +7,7 @@ class AlunoService {
 
 	getProfile = async (req, res) => {
 		const user = req.user;
-		res.json(await this.AlunoRepository.getAlunoPorId(1));
-		// res.json(this.AlunoRepository.getAlunoPorId(user.id))
+		res.json(await this.AlunoRepository.getAlunoPorId(user.id));
 	};
 
 	getAlunos = async (req, res) => {
@@ -21,8 +20,7 @@ class AlunoService {
 
 	putProfile = async (req, res) => {
 		const user = req.user;
-		res.json(await this.AlunoRepository.atualizarAluno(1, req.body));
-		// res.json(this.AlunoRepository.getAlunoPorId(user.id))
+		res.json(await this.AlunoRepository.atualizarAluno(user.id, req.body));
 	};
 
 	putAluno = async (req, res) => {

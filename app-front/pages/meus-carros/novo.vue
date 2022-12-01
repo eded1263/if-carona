@@ -8,6 +8,7 @@
 import DetalhesCarroPage from '@/components/detalhes-carro/DetalhesCarroPage.vue'
 export default {
   components: { DetalhesCarroPage },
+  middleware: 'isLoggedIn',
   fetch({ store }) {
     store.commit('layout/SET_BACK_BUTTON', true)
   },

@@ -8,6 +8,7 @@
 import DetalhesAreaComumPage from '@/components/area-comum/DetalhesAreaComumPage.vue'
 export default {
   components: { DetalhesAreaComumPage },
+  middleware: 'isLoggedIn',
   fetch({ store }) {
     store.commit('layout/SET_BACK_BUTTON', true)
   },

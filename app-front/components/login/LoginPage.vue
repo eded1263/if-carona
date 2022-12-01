@@ -6,25 +6,21 @@
     <CustomHeader page="Login" class="header" />
     <v-form ref="form" class="formulario">
       <CustomInput
-        prefix="Nome:"
-        :value.sync="form.nome"
-        :rules="[rules.required]"
-      />
-
-      <CustomInput
         prefix="RA:"
         :value.sync="form.RA"
         :rules="[rules.required]"
       />
-
       <CustomInput
-        prefix="Email:"
-        :value.sync="form.email"
+        prefix="Senha:"
+        :value.sync="form.senha"
         :rules="[rules.required]"
+        type="password"
       />
       <v-row>
         <v-col>
-          <RoundButton @click.native="submitCadastro"> Entrar </RoundButton>
+          <RoundButton size="long" @click.native="submitCadastro">
+            Entrar
+          </RoundButton>
         </v-col>
       </v-row>
     </v-form>
@@ -42,9 +38,8 @@ export default {
     return {
       isLoading: false,
       form: {
-        nome: '',
         RA: '',
-        email: '',
+        senha: '',
       },
       rules: {
         required: (v) => {
@@ -57,15 +52,24 @@ export default {
     }
   },
   methods: {
-    submitCadastro() {
+    async submitCadastro() {
       const isValid = this.$refs.form.validate()
       if (isValid) {
         this.isLoading = true
-        setTimeout(() => {
-          this.$router.push({
-            name: 'home',
+        await this.$store
+          .dispatch('user/POST_LOGIN', this.form)
+          .then(() => {
+            this.isLoading = false
+            this.$router.push({ name: 'home' })
           })
-        }, 1000)
+          .catch((err) => {
+            this.isLoading = false
+            this.$notify({
+              type: 'error',
+              text: err.response.data.message,
+              title: 'Erro',
+            })
+          })
       }
     },
   },
