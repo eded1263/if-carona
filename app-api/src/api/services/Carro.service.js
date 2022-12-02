@@ -1,15 +1,18 @@
 const CarroRepository = require("../repositories/carro/Carro.repository");
+const FotoRepository = require("../repositories/foto/Foto.repository");
 
 class CarroService {
 	CarroRepository;
+	FotoRepository;
 	constructor() {
 		this.CarroRepository = new CarroRepository();
+		this.FotoRepository = new FotoRepository();
 	}
 
 	getMeusCarros = async (req, res) => {
-		// const user = req.user
-		const user = {};
-		const meusCarros = await this.CarroRepository.getCarrosDoUsuario(1);
+		const meusCarros = await this.CarroRepository.getCarrosDoUsuario(
+			req.user.id
+		);
 		res.json(meusCarros);
 	};
 
@@ -61,52 +64,27 @@ class CarroService {
 	};
 
 	// Daqui para baixo status: TODO
-	postImagem = (req, res) => {
-		const { key, location: url = "" } = req.file;
+	postImagem = async (req, res) => {
+		const { key, location } = req.file;
+		let url = location;
+		if (!url) {
+			url = `${process.env.APP_BASE_URL}/files/${key}`;
+		}
+
+		let carro = await this.CarroRepository.getCarroPorId(req.params.id);
+		if (!carro) {
+			res.status(404).json({
+				message: "Not found",
+			});
+		}
+		await this.FotoRepository.deletarImagens({ carroId: carro.id });
 		const foto = {
 			url,
 			nomeImagem: key,
 			ordem: 0,
+			carroId: carro.id,
 		};
-		let carro = this.CarroRepository.getCarroPorId(req.params.id);
-		if (!carro) {
-			res.status(404).json({
-				message: "Not found",
-			});
-		}
-		carro.fotos = [foto];
-		res.json(this.CarroRepository.atualizarCarro(req.params.id, carro));
-	};
-
-	putImagem = (req, res) => {
-		let carro = this.CarroRepository.getCarroPorId(req.params.id);
-		if (!carro) {
-			res.status(404).json({
-				message: "Not found",
-			});
-		}
-		res.json(carro);
-	};
-	deleteImagem = (req, res) => {
-		let carro = this.CarroRepository.getCarroPorId(req.params.id);
-		if (!carro) {
-			res.status(404).json({
-				message: "Not found",
-			});
-		}
-		const { nomeImagem } = req.body;
-		const imageIndex = carro.fotos.findIndex(
-			(f) => f.nomeImagem === nomeImagem
-		);
-		if (imageIndex < 0) {
-			res.status(404).json({
-				message: "Not found",
-			});
-		}
-		carro.fotos.splice(imageIndex);
-		res.json(
-			res.json(this.CarroRepository.atualizarCarro(req.params.id, carro))
-		);
+		res.json(this.FotoRepository.adicionarImagem(foto));
 	};
 }
 

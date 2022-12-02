@@ -42,18 +42,8 @@ class CarroController {
 		this.router.post(
 			"/carro/:id/imagem",
 			passportMiddleware.authenticate(),
-			multer(multerConfig).single("file"),
+			multer(multerConfig).single("imagem"),
 			this.CarroService.postImagem
-		);
-		this.router.put(
-			"/carro/:id/imagem",
-			passportMiddleware.authenticate(),
-			this.CarroService.putImagem
-		);
-		this.router.delete(
-			"/carro/:id/imagem",
-			passportMiddleware.authenticate(),
-			this.CarroService.deleteImagem
 		);
 	}
 }

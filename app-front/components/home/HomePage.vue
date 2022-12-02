@@ -12,8 +12,7 @@ export default {
   components: { CustomHeader, Menu },
   computed: {
     user() {
-      // return this.$store.state.user.currentUser
-      return { isAdmin: false }
+      return this.$store.state.user.currentUser
     },
   },
   methods: {
@@ -22,6 +21,14 @@ export default {
         {
           label: 'Meus Carros',
           to: 'meus-carros',
+        },
+        {
+          label: 'Ver caronas',
+          to: 'carona',
+        },
+        {
+          label: 'Minhas caronas',
+          to: 'carona-historico',
         },
         {
           label: 'Perfil',

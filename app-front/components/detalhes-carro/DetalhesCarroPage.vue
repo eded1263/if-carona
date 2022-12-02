@@ -7,6 +7,7 @@
       :page="isUpdate ? 'Detalhes do carro' : 'Cadastrar Carro'"
       class="header"
     />
+    <ImagensCarro class="imagem" />
     <v-form ref="form" class="formulario" @submit.prevent="submitForm">
       <v-row>
         <v-col sm="12" md="6" class="custom">
@@ -64,8 +65,9 @@ import Loading from '@/components/layout/Loading.vue'
 import CustomHeader from '@/components/layout/CustomHeader.vue'
 import CustomInput from '@/components/form/CustomInput.vue'
 import RoundButton from '@/components/layout/RoundButton.vue'
+import ImagensCarro from '@/components/detalhes-carro/ImagensCarro.vue'
 export default {
-  components: { CustomHeader, CustomInput, RoundButton, Loading },
+  components: { CustomHeader, CustomInput, RoundButton, Loading, ImagensCarro },
   props: {
     isUpdate: {
       type: Boolean,
@@ -127,8 +129,12 @@ export default {
                 name: 'meus-carros',
               })
             })
-            .catch((_error) => {
-              // Adicionar notificação de erro
+            .catch((err) => {
+              this.$notify({
+                type: 'error',
+                text: err.response.data.message,
+                title: 'Erro',
+              })
             })
         } else {
           this.$store
@@ -183,6 +189,9 @@ export default {
   }
   > .formulario {
     flex: 2;
+  }
+  > .imagem {
+    margin-bottom: 10px;
   }
 }
 .custom {

@@ -4,11 +4,15 @@ class CarroRepository {
 	getCarrosDoUsuario = (user) => {
 		return db.Carro.findAndCountAll({
 			where: { criadoPor: user, deletedAt: null },
+			include: { model: db.Foto, as: "fotos" },
 		});
 	};
 
 	atualizarCarro = (id, carro) => {
-		return db.Carro.update(carro, { where: { id, deletedAt: null } });
+		return db.Carro.update(carro, {
+			where: { id, deletedAt: null },
+			include: { model: db.Foto, as: "fotos" },
+		});
 	};
 
 	deleteCarroPorId(id) {
@@ -19,7 +23,9 @@ class CarroRepository {
 	}
 
 	getCarroPorId(id) {
-		return db.Carro.findByPk(id);
+		return db.Carro.findByPk(id, {
+			include: { model: db.Foto, as: "fotos" },
+		});
 	}
 
 	async salvarCarro(carro) {
