@@ -116,7 +116,7 @@ export default {
       return this.$store.state.user.currentUser.isAdmin
     },
     cantUpdate() {
-      return !(this.isUpdate && this.isAdmin)
+      return !this.isAdmin || this.isUpdate
     },
   },
   created() {
