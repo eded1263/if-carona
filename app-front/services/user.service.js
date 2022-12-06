@@ -3,28 +3,28 @@ import { BaseService } from './base.service'
 class UserService {
   getUsers() {
     return BaseService.request({
-      url: '/api/admin/user',
+      url: '/admin/user',
       method: 'GET',
     }).then((response) => response.data)
   }
 
   getUser(id) {
     return BaseService.request({
-      url: `/api/user/${id}`,
+      url: `/user/${id}`,
       method: 'GET',
     }).then((response) => response.data)
   }
 
   getProfile() {
     return BaseService.request({
-      url: `/api/user`,
+      url: `/user`,
       method: 'GET',
     }).then((response) => response.data)
   }
 
   putUser(id, user) {
     return BaseService.request({
-      url: `/api/admin/user/${id}`,
+      url: `/admin/user/${id}`,
       method: 'PUT',
       data: user,
     }).then((response) => response.data)
@@ -32,7 +32,7 @@ class UserService {
 
   putProfile(user) {
     return BaseService.request({
-      url: `/api/user/`,
+      url: `/user/`,
       method: 'PUT',
       data: user,
     }).then((response) => response.data)
@@ -56,7 +56,7 @@ class UserService {
 
   deleteUser(id) {
     return BaseService.request({
-      url: `/api/admin/user/${id}`,
+      url: `/admin/user/${id}`,
       method: 'DELETE',
     }).then((response) => response.data)
   }

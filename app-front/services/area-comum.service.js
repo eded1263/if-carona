@@ -2,21 +2,21 @@ import { BaseService } from './base.service'
 class AreaComumService {
   getAreasComuns() {
     return BaseService.request({
-      url: '/api/area-comum',
+      url: '/area-comum',
       method: 'GET',
     }).then((response) => response.data)
   }
 
   getAreaComum(id) {
     return BaseService.request({
-      url: `/api/area-comum/${id}`,
+      url: `/area-comum/${id}`,
       method: 'GET',
     }).then((response) => response.data)
   }
 
   postAreaComum(areaComum) {
     return BaseService.request({
-      url: '/api/area-comum',
+      url: '/area-comum',
       method: 'POST',
       data: areaComum,
     }).then((response) => response.data)
@@ -24,7 +24,7 @@ class AreaComumService {
 
   putAreaComum(id, areaComum) {
     return BaseService.request({
-      url: `/api/area-comum/${id}`,
+      url: `/area-comum/${id}`,
       method: 'PUT',
       data: areaComum,
     }).then((response) => response.data)
@@ -32,7 +32,7 @@ class AreaComumService {
 
   deleteAreaComum(id) {
     return BaseService.request({
-      url: `/api/area-comum/${id}`,
+      url: `/area-comum/${id}`,
       method: 'DELETE',
     }).then((response) => response.data)
   }

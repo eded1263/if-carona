@@ -147,8 +147,12 @@ export default {
                 name: 'usuarios',
               })
             })
-            .catch((_error) => {
-              // Adicionar notificação de erro
+            .catch(() => {
+              this.$notify({
+                type: 'error',
+                text: 'Erro na criação do usuário',
+                title: 'Erro',
+              })
             })
         } else {
           this.$store

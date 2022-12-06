@@ -15,7 +15,7 @@ class AuthController {
 	registerRoutes() {
 		this.router.post("/login", this.login);
 		this.router.post(
-			"/cadastrar-usuario",
+			"/cadastro-usuario",
 			passportMiddleware.authenticate(),
 			this.cadastrarUsuario
 		);

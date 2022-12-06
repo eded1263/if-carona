@@ -67,13 +67,10 @@ export const actions = {
   },
   POST_USER: ({ commit }, user) => {
     commit('SET_LOADING', true)
-    return userService
-      .postUser(user)
-      .then((newUser) => {
-        commit('SET_LOADING', false)
-        return newUser
-      })
-      .catch((error) => commit('SET_ERROR', error))
+    return userService.postUser(user).then((newUser) => {
+      commit('SET_LOADING', false)
+      return newUser
+    })
   },
   POST_LOGIN: ({ commit, dispatch }, credentials) => {
     commit('SET_LOADING', true)
