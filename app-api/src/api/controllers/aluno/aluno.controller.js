@@ -21,7 +21,7 @@ class AlunoController {
 		);
 		this.router.get(
 			"/admin/user",
-			passportMiddleware.authenticate(),
+			passportMiddleware.authenticateOnlyAdmin(),
 			this.AlunoService.getAlunos
 		);
 		this.router.get(
@@ -36,12 +36,12 @@ class AlunoController {
 		);
 		this.router.put(
 			"/admin/user/:id",
-			passportMiddleware.authenticate(),
+			passportMiddleware.authenticateOnlyAdmin(),
 			this.AlunoService.putAluno
 		);
 		this.router.delete(
 			"/admin/user/:id",
-			passportMiddleware.authenticate(),
+			passportMiddleware.authenticateOnlyAdmin(),
 			this.AlunoService.deleteAluno
 		);
 	}
