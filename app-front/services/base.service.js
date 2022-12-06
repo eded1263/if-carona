@@ -13,6 +13,9 @@ export class BaseService {
   }
 
   static authRequest(params) {
+    if (!axios.defaults.headers.Authorization && cookies.get('Authorization')) {
+      axios.defaults.headers.Authorization = cookies.get('Authorization') || ''
+    }
     return axios({
       ...params,
       baseURL: process.env.API_AUTH_BASE_URL,
