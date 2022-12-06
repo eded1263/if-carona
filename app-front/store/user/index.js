@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { resetAuthToken } from '../../utils/auth'
 import { userService } from '@/services/user.service'
 
 export const state = () => ({
@@ -63,6 +64,7 @@ export const actions = {
       })
       .catch((error) => {
         commit('SET_ERROR', error)
+        resetAuthToken()
       })
   },
   POST_USER: ({ commit }, user) => {
