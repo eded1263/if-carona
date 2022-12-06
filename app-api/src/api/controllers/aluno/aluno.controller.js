@@ -15,32 +15,32 @@ class AlunoController {
 
 	initializeRoutes() {
 		this.router.get(
-			"/api/user",
+			"/user",
 			passportMiddleware.authenticate(),
 			this.AlunoService.getProfile
 		);
 		this.router.get(
-			"/api/admin/user",
+			"/admin/user",
 			passportMiddleware.authenticate(),
 			this.AlunoService.getAlunos
 		);
 		this.router.get(
-			"/api/user/:id",
+			"/user/:id",
 			passportMiddleware.authenticate(),
 			this.AlunoService.getAlunoPorId
 		);
 		this.router.put(
-			"/api/user",
+			"/user",
 			passportMiddleware.authenticate(),
 			this.AlunoService.putProfile
 		);
 		this.router.put(
-			"/api/admin/user/:id",
+			"/admin/user/:id",
 			passportMiddleware.authenticate(),
 			this.AlunoService.putAluno
 		);
 		this.router.delete(
-			"/api/admin/user/:id",
+			"/admin/user/:id",
 			passportMiddleware.authenticate(),
 			this.AlunoService.deleteAluno
 		);
