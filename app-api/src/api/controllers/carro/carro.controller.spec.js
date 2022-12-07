@@ -7,16 +7,11 @@ describe("Teste das rotas de Carro", () => {
 
 	beforeAll(async () => {
 		await thisDb.sequelize.sync({ force: true });
-		const aluno = {
-			RA: "123456",
-			cpf: "123456",
-			nome: "Teste",
-			email: "teste@teste.com",
-			senha: "123456",
-		};
 
 		// Para rodar estes testes, é necessário ter um usuário cadastrado
-		await supertest(app).post("/admin/user").send(aluno);
+		await thisDb.sequelize.query(`INSERT INTO Users VALUES
+			(1, '2131', 'teste', 'teste@teste.com', '321321564564654654', '123456789', 1, NULL, NULL, '2022-12-07 20:12:51', '2022-12-07 20:12:51');
+		`);
 	});
 
 	it("[POST] Criar Carro", async () => {

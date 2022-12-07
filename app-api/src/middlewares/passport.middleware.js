@@ -51,9 +51,21 @@ function passportMiddleware() {
 			return passport.initialize();
 		},
 		authenticate: () => {
+			if (process.env.NODE_ENV == "test") {
+				return (req, res, next) => {
+					req.user = { id: 1 };
+					next();
+				};
+			}
 			return passport.authenticate(["jwt"], { session: false });
 		},
 		authenticateOnlyAdmin: () => {
+			if (process.env.NODE_ENV == "test") {
+				return (req, res, next) => {
+					req.user = { id: 1 };
+					next();
+				};
+			}
 			return passport.authenticate(["adminStrategy"], { session: false });
 		},
 	};

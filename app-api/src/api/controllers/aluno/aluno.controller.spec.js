@@ -8,20 +8,6 @@ describe("Teste das rotas de aluno", () => {
 		await thisDb.sequelize.sync({ force: true });
 	});
 
-	it("[POST] Criar perfil do aluno", async () => {
-		const aluno = {
-			RA: "123456",
-			cpf: "123456",
-			nome: "Teste",
-			email: "teste@teste.com",
-			senha: "123456",
-		};
-
-		const response = await supertest(app).post("/admin/user").send(aluno);
-
-		expect(response.status).toBe(200);
-	});
-
 	it("[GET] Listagem de alunos", async () => {
 		const response = await supertest(app).get("/admin/user");
 
