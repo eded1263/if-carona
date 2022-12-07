@@ -1,52 +1,4 @@
-# /aluno/login:
-#   post:
-#     description: Login de aluno
-#     responses:
-#       200:
-#         description: Request OK
-#       400:
-#         description: Dados de login incorretos
-#     parameters:
-#       - name: RA
-#         in: form
-#         description: RA do aluno
-#         type: string
-#         required: true
-#       - name: password
-#         in: form
-#         description: Senha do aluno
-#         type: string
-#         required: true
-/aluno:
-  post:
-    tags:
-      - Aluno
-    description: Registro de aluno
-    responses:
-      200:
-        description: Aluno cadastrado
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Aluno"
-      400:
-        description: Dados inválidos
-    parameters:
-      - name: nome
-        in: form
-        description: Nome do aluno
-        type: string
-        required: true
-      - name: senha
-        in: form
-        description: Senha do aluno
-        type: string
-        required: true
-      - name: RA
-        in: form
-        description: Prontuário do aluno
-        type: string
-        required: true
+/user:
   get:
     tags:
       - Aluno
@@ -109,39 +61,30 @@
         type: string
         required: true
 
-/aluno/foto:
-  post:
+/admin/user:
+  get:
     tags:
       - Aluno
-    description: Rota para atualizar a foto de perfil do Aluno
+    description: Rota para retornar todos os alunos da aplicação
     responses:
       200:
-        description: Retorna o aluno atualizado
+        description: Retorna os perfis dos alunos
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Aluno"
-      400:
-        description: Formato de imagem inválida
+              type: array
+              items:
+                $ref: "#/components/schemas/Aluno"
       401:
-        description: Erro no token de acesso
+        description: Erro no token de acesso - Confirme se você possue acesso como admin
     parameters:
       - name: Authorization
         in: header
         description: Token de acesso
         type: string
         required: true
-      - name: imagem
-        in: formData
-        type: file
-        required: true
-        description: Foto de perfil do aluno
-      - name: nomeImagem
-        in: formData
-        type: string
-        required: true
-        description: Nome da imagem
-/aluno/{idAluno}:
+
+/user/{idAluno}:
   get:
     tags:
       - Aluno
@@ -168,3 +111,77 @@
         type: string
         required: true
         description: Id do aluno requisitado
+
+/admin/user/{idAluno}:
+  get:
+    tags:
+      - Aluno
+    description: Ver perfil de aluno - COMO ADMIN
+    responses:
+      200:
+        description: Request ok - retorna dados do aluno solicitado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
+      401:
+        description: Erro no token de acesso
+      404:
+        description: Aluno não encontrado
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: idAluno
+        in: params
+        type: string
+        required: true
+        description: Id do aluno requisitado
+  put:
+    tags:
+      - Aluno
+    description: Rota para atualizar os dados de perfil do aluno - COMO ADMIN
+    responses:
+      200:
+        description: Retorna o perfil do aluno
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
+      401:
+        description: Erro no token de acesso - Confirme se você possue acesso como admin
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
+      - name: nome
+        in: form
+        description: Nome do aluno
+        type: string
+      - name: RA
+        in: form
+        description: RA do aluno
+        type: string
+  delete:
+    tags:
+      - Aluno
+    description: Rota para excluir o perfil do aluno
+    responses:
+      200:
+        description: Retorna o perfil do aluno
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Aluno"
+      401:
+        description: Erro no token de acesso - - Confirme se você possue acesso como admin
+    parameters:
+      - name: Authorization
+        in: header
+        description: Token de acesso
+        type: string
+        required: true
